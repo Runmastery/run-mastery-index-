@@ -1,6 +1,11 @@
 function calculateRunMasteryIndex(gender, ageGroup, distance, userTime) {
     console.log("Calculating Index for:", gender, ageGroup, distance, userTime); // Debug-logg
 
+    // Om användaren är under 35, använd "M1-34" eller "W1-34"
+    if (parseInt(ageGroup.replace(/\D/g, "")) < 35) {
+        ageGroup = gender === "Men" ? "M1-34" : "W1-34";
+    }
+
     // Kontrollera om datan existerar
     if (!runningRecords[gender] || !runningRecords[gender][ageGroup] || !runningRecords[gender][ageGroup][distance]) {
         console.error("Missing record data for:", gender, ageGroup, distance);

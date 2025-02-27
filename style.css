@@ -1,0 +1,134 @@
+/* --- GENERAL STYLING --- */
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    color: #FBCA61;
+    text-align: center;
+}
+
+/* --- BACKGROUND EFFECT --- */
+.matrix-background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    overflow: hidden;
+    z-index: -1;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- HEADER --- */
+header {
+    text-align: center;
+    padding: 30px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* --- CALCULATOR CONTAINER --- */
+.calculator-container {
+    background-color: #1a1a1a;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #FBCA61;
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+/* --- HEADINGS INSIDE THE CALCULATOR --- */
+.calculator-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+/* --- BUTTONS --- */
+.button-group button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: 2px solid #FBCA61;
+    background: transparent;
+    color: #FBCA61;
+    cursor: pointer;
+    margin: 5px;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.button-group button:hover {
+    background: #FBCA61;
+    color: #000;
+}
+
+/* --- AGE SELECTOR --- */
+.age-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+#age-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+input[type="range"] {
+    width: 60%;
+    appearance: none;
+    background: #FBCA61;
+    height: 8px;
+    border-radius: 5px;
+}
+
+/* --- TIME INPUTS --- */
+.time-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.time-inputs input {
+    width: 80px;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.2rem;
+    background: #000;
+    color: #FBCA61;
+    border: 2px solid #FBCA61;
+    border-radius: 5px;
+}
+
+.time-inputs input::placeholder {
+    color: #FBCA61;
+    font-weight: bold;
+}
+
+/* --- CALCULATE BUTTON --- */
+.calculate-button {
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    background: #FBCA61;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.calculate-button:hover {
+    background: #e0b04f;
+}

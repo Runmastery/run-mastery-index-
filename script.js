@@ -59,20 +59,21 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Funktion för att bestämma åldersgrupp baserat på inmatad ålder
-    function getAgeGroup(gender, age) {
-        if (age < 35) return gender === "Men" ? "M1-34" : "W1-34";
-        if (age < 40) return gender === "Men" ? "M35" : "W35";
-        if (age < 45) return gender === "Men" ? "M40" : "W40";
-        if (age < 50) return gender === "Men" ? "M45" : "W45";
-        if (age < 55) return gender === "Men" ? "M50" : "W50";
-        if (age < 60) return gender === "Men" ? "M55" : "W55";
-        if (age < 65) return gender === "Men" ? "M60" : "W60";
-        if (age < 70) return gender === "Men" ? "M65" : "W65";
-        if (age < 75) return gender === "Men" ? "M70" : "W70";
-        if (age < 80) return gender === "Men" ? "M75" : "W75";
-        if (age < 85) return gender === "Men" ? "M80" : "W80";
-        return gender === "Men" ? "M85" : "W85"; // Default för 85+
-    }
+   function getAgeGroup(gender, age) {
+    if (age < 35) return gender === "Men" ? "M1-34" : "W1-34";
+    if (age < 40) return gender === "Men" ? "M35" : "W35";
+    if (age < 45) return gender === "Men" ? "M40" : "W40";
+    if (age < 50) return gender === "Men" ? "M45" : "W45";
+    if (age < 55) return gender === "Men" ? "M50" : "W50";
+    if (age < 60) return gender === "Men" ? "M55" : "W55";
+    if (age < 65) return gender === "Men" ? "M60" : "W60";
+    if (age < 70) return gender === "Men" ? "M65" : "W65";
+    if (age < 75) return gender === "Men" ? "M70" : "W70";
+    if (age < 80) return gender === "Men" ? "M75" : "W75";
+    if (age < 85) return gender === "Men" ? "M80" : "W80";
+    return gender === "Men" ? "M85" : "W85"; // Default för 85+
+}
+
 
     // Funktion för att markera vald knapp
     function highlightSelectedButton(selectedButton, buttonGroup) {

@@ -132,9 +132,11 @@ input[type="range"] {
 .calculate-button:hover {
     background: #e0b04f;
 }
-/* --- ACTIVE BUTTON STATE --- */
+/* --- ACTIVE BUTTON STATE (FIX) --- */
 .button-group button.active {
-    background: #FBCA61; /* Gul bakgrund när vald */
-    color: #000;
+    background: #FBCA61; /* Gul bakgrund */
+    color: #1a1a1a; /* Mörk text så att det syns */
     font-weight: bold;
+    border: 2px solid #FBCA61;
 }
+

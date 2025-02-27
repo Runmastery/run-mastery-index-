@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let selectedDistance = null;
     let selectedGender = "Men";
-    let selectedAgeGroup = "M1-34"; // Default för män
+    let selectedAgeGroup = "M1-34"; // Default age group
 
     // Uppdatera åldervärde och åldersgrupp
     ageInput.addEventListener("input", function() {
@@ -19,13 +19,13 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("maleBtn").addEventListener("click", function() {
         selectedGender = "Men";
         selectedAgeGroup = getAgeGroup(selectedGender, ageInput.value);
-        highlightSelectedButton("maleBtn", "femaleBtn");
+        highlightSelectedButton(this, ["femaleBtn"]);
     });
 
     document.getElementById("femaleBtn").addEventListener("click", function() {
         selectedGender = "Women";
         selectedAgeGroup = getAgeGroup(selectedGender, ageInput.value);
-        highlightSelectedButton("femaleBtn", "maleBtn");
+        highlightSelectedButton(this, ["maleBtn"]);
     });
 
     // Välj distans
@@ -67,5 +67,15 @@ document.addEventListener("DOMContentLoaded", function() {
         if (age < 80) return gender === "Men" ? "M75" : "W75";
         if (age < 85) return gender === "Men" ? "M80" : "W80";
         return gender === "Men" ? "M85" : "W85"; // Default för 85+
+    }
+
+    // Funktion för att markera vald knapp
+    function highlightSelectedButton(selectedButton, otherButtons) {
+        if (Array.isArray(otherButtons)) {
+            otherButtons.forEach(id => document.getElementById(id).style.background = "transparent");
+        } else {
+            otherButtons.style.background = "transparent";
+        }
+        selectedButton.style.background = "#FBCA61";
     }
 });

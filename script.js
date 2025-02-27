@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const ageInput = document.getElementById("age");
     const ageValue = document.getElementById("age-value");
-    const distanceButtons = document.querySelectorAll(".distance-btn");
     const calculateButton = document.getElementById("calculateBtn");
     const resultDiv = document.getElementById("result");
 
@@ -19,20 +18,21 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("maleBtn").addEventListener("click", function() {
         selectedGender = "Men";
         selectedAgeGroup = getAgeGroup(selectedGender, ageInput.value);
-        highlightSelectedButton(this, ["femaleBtn"]);
+        highlightSelectedButton(this, document.querySelectorAll(".gender-btn"));
     });
 
     document.getElementById("femaleBtn").addEventListener("click", function() {
         selectedGender = "Women";
         selectedAgeGroup = getAgeGroup(selectedGender, ageInput.value);
-        highlightSelectedButton(this, ["maleBtn"]);
+        highlightSelectedButton(this, document.querySelectorAll(".gender-btn"));
     });
 
     // Välj distans
-    distanceButtons.forEach(button => {
+    document.querySelectorAll(".distance-btn").forEach(button => {
         button.addEventListener("click", function() {
-            selectedDistance = this.dataset.distance;
-            highlightSelectedButton(this, distanceButtons);
+            selectedDistance = this.getAttribute("data-distance");
+            highlightSelectedButton(this, document.querySelectorAll(".distance-btn"));
+            console.log("Selected distance:", selectedDistance); // Debugging
         });
     });
 
@@ -70,12 +70,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Funktion för att markera vald knapp
-    function highlightSelectedButton(selectedButton, otherButtons) {
-        if (Array.isArray(otherButtons)) {
-            otherButtons.forEach(id => document.getElementById(id).style.background = "transparent");
-        } else {
-            otherButtons.style.background = "transparent";
-        }
-        selectedButton.style.background = "#FBCA61";
+    function highlightSelectedButton(selectedButton, buttonGroup) {
+        buttonGroup.forEach(button => button.classList.remove("active"));
+        selectedButton.classList.add("active");
     }
 });

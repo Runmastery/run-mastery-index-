@@ -38,6 +38,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Beräkna-knappen
     calculateButton.addEventListener("click", function() {
+        console.log("Calculate button clicked!"); // Debug-logg
+
         const hours = parseInt(document.getElementById("hours").value) || 0;
         const minutes = parseInt(document.getElementById("minutes").value) || 0;
         const seconds = parseInt(document.getElementById("seconds").value) || 0;
@@ -48,7 +50,10 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+        console.log("Total time in seconds:", totalSeconds); // Debug-logg
+
         const index = calculateRunMasteryIndex(selectedGender, selectedAgeGroup, selectedDistance, totalSeconds);
+        console.log("Calculated Index:", index); // Debug-logg
 
         resultDiv.innerHTML = `<p>Your Run Mastery Index: <strong>${index}</strong></p>`;
     });

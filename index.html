@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Mastery Index</title>
+    <meta name="description" content="Calculate your Run Mastery Index with this interactive tool.">
+    <meta name="keywords" content="Run Mastery, running index, performance tracker, running calculator">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Effect -->
+    <div class="matrix-background">
+        <canvas id="matrixCanvas"></canvas>
+    </div>
+
+    <!-- Page Header -->
+    <header>Run Mastery Index</header>
+
+    <!-- Calculator Container -->
+    <div class="calculator-container">
+        <h2>Calculate Your Performance</h2>
+        
+        <!-- Gender Selection -->
+        <div class="button-group">
+            <button id="maleBtn">Man</button>
+            <button id="femaleBtn">Woman</button>
+        </div>
+
+        <!-- Age Selection -->
+        <div class="age-selector">
+            <span id="age-value">26</span>
+            <input type="range" id="age" min="0" max="100" value="26">
+        </div>
+
+        <!-- Distance Selection -->
+        <div class="button-group">
+            <button class="distance-btn" data-distance="5000m">5k</button>
+            <button class="distance-btn" data-distance="10000m">10k</button>
+            <button class="distance-btn" data-distance="Half Marathon">Half Marathon</button>
+            <button class="distance-btn" data-distance="Marathon">Marathon</button>
+        </div>
+
+        <!-- Time Input -->
+        <h3>Enter Your Time</h3>
+        <div class="time-inputs">
+            <input type="number" id="hours" placeholder="Hours" min="0">
+            <input type="number" id="minutes" placeholder="Minutes" min="0" max="59">
+            <input type="number" id="seconds" placeholder="Seconds" min="0" max="59">
+        </div>
+
+        <!-- Calculate Button -->
+        <button id="calculateBtn" class="calculate-button">Get Result</button>
+        
+        <!-- Result Display -->
+        <div id="result"></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="records.js"></script>
+    <script src="calculator.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

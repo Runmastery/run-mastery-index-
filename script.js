@@ -2,17 +2,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const calculateButton = document.getElementById("calculateBtn");
     const resultDiv = document.getElementById("result");
 
-    let selectedDistance = "10000m"; // Default distance
+    let selectedDistance = "10K"; // Default distance
     let selectedGender = "Men";
     let selectedAge = 25; // Default age
 
-    /** --- Infinite Scroll Funktion för Gender & Distance --- */
+    /** --- Lägger till rubriker ovanför valen --- */
+    function addLabels() {
+        document.getElementById("genderPicker").insertAdjacentHTML("beforebegin", "<label class='picker-label'>Gender</label>");
+        document.getElementById("agePicker").insertAdjacentHTML("beforebegin", "<label class='picker-label'>Age</label>");
+        document.getElementById("distancePicker").insertAdjacentHTML("beforebegin", "<label class='picker-label'>Distance</label>");
+    }
+    addLabels();
+
+    /** --- Infinite Scroll för Gender & Distance (fixat statiskt val) --- */
     function setupInfiniteScroll(containerId, optionsArray) {
         const container = document.getElementById(containerId);
         container.innerHTML = "";
-
-        // Skapa en loopande lista
-        optionsArray = [...optionsArray, ...optionsArray, ...optionsArray];
 
         optionsArray.forEach((optionText) => {
             const option = document.createElement("div");
@@ -28,8 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
             container.appendChild(option);
         });
-
-        container.scrollLeft = container.scrollWidth / 3; // Start i mitten
     }
 
     setupInfiniteScroll("genderPicker", ["Men", "Women"]);
@@ -54,10 +57,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    /** --- Dynamisk scroll för Time (Fixat studseffekt & centrering) --- */
-    const timePickers = document.querySelectorAll(".time-picker");
+    /** --- Dynamisk scroll för tidspickern med iOS-känsla --- */
+    function setupTimePicker(pickerId, min, max) {
+        const picker = document.getElementById(pickerId);
+        picker.innerHTML = "";
 
-    timePickers.forEach(picker => {
+        for (let i = min; i <= max; i++) {
+            const option = document.createElement("div");
+            option.classList.add("option");
+            option.dataset.value = i;
+            option.textContent = i;
+            picker.appendChild(option);
+        }
+
         picker.addEventListener("scroll", function () {
             let options = picker.querySelectorAll(".option");
             let scrollTop = picker.scrollTop;
@@ -71,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
 
-            // Snäpp tillbaka till exakt rätt position
+            // Snäpp tillbaka till exakt rätt position för en jämn scroll
             setTimeout(() => {
                 picker.scrollTo({
                     top: centerIndex * optionHeight,
@@ -80,11 +92,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 100);
         });
 
-        // Förhindra att tidspickern kan dras utanför sin position
+        // Förhindra att man kan dra utanför hjulet
         picker.addEventListener("mousedown", function (event) {
             event.preventDefault();
         });
-    });
+    }
+
+    setupTimePicker("hoursPicker", 0, 23);
+    setupTimePicker("minutesPicker", 0, 59);
+    setupTimePicker("secondsPicker", 0, 59);
 
     /** --- Beräkna-knappen --- */
     calculateButton.addEventListener("click", function () {

@@ -52,19 +52,13 @@ header {
     margin-bottom: 20px;
 }
 
-/* --- PICKER STYLING --- */
+/* --- PICKER STYLING (Gender, Age, Distance) --- */
 .picker-container {
     margin: 20px auto;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.picker-container label {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #FBCA61;
 }
 
 .picker {
@@ -79,6 +73,7 @@ header {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     white-space: nowrap;
+    gap: 5px;
 }
 
 .option {
@@ -88,6 +83,7 @@ header {
     cursor: pointer;
     scroll-snap-align: center;
     transition: transform 0.3s, color 0.3s;
+    opacity: 0.5;
 }
 
 .option.active {
@@ -96,42 +92,10 @@ header {
     border-radius: 10px;
     font-weight: bold;
     transform: scale(1.1);
+    opacity: 1;
 }
 
 .picker::-webkit-scrollbar {
-    display: none;
-}
-
-/* --- AGE PICKER (VERTICAL 15-85 YEARS) --- */
-.age-picker {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 150px;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    width: 100px;
-    background: #1a1a1a;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
-    padding: 10px 0;
-}
-
-.age-picker .option {
-    scroll-snap-align: center;
-    padding: 10px;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-.age-picker .option.active {
-    background: #FBCA61;
-    color: #000;
-    font-weight: bold;
-    border-radius: 10px;
-}
-
-.age-picker::-webkit-scrollbar {
     display: none;
 }
 
@@ -140,30 +104,32 @@ header {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .time-picker {
     width: 70px;
-    height: 150px;
-    overflow-y: auto;
+    height: 90px; /* Ensuring only one full digit and half of above/below */
+    overflow-y: hidden;
     scroll-snap-type: y mandatory;
     text-align: center;
     background: #1a1a1a;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
-    padding: 10px 0;
+    padding: 5px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 .time-picker .option {
-    padding: 10px;
+    padding: 5px;
     font-size: 1.5rem;
     color: #FBCA61;
     scroll-snap-align: center;
     cursor: pointer;
+    opacity: 0.5;
 }
 
 .time-picker .option.active {
@@ -172,8 +138,40 @@ header {
     border-radius: 10px;
     font-weight: bold;
     transform: scale(1.1);
+    opacity: 1;
 }
 
-.time-picker::-webkit-scrollbar {
-    display: none;
+/* Gör siffrorna ovanför och under mer transparenta */
+.time-picker .option:not(.active) {
+    opacity: 0.3;
+}
+
+/* Tidsrubriker (H, Min, Sec) */
+.time-labels {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* --- CALCULATE BUTTON --- */
+.calculate-button {
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    background: #FBCA61;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: 0.3s;
+    margin-top: 20px;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(251, 202, 97, 0.7);
+}
+
+.calculate-button:hover {
+    background: #e0b04f;
+    transform: scale(1.05);
 }

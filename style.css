@@ -6,7 +6,11 @@ body {
     background-color: #000000;
     color: #FBCA61;
     text-align: center;
-    overflow-x: hidden;
+    overflow: hidden; /* Hindrar scrollning */
+    height: 100vh; /* Sätter fast höjd */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* --- BACKGROUND EFFECT --- */
@@ -17,26 +21,28 @@ body {
     background: #000000;
     overflow: hidden;
     z-index: -1;
-    padding: 20px; /* Lägger till mer space runt för att synliggöra Matrix-effekten */
+    padding: 25px; /* Mer space runt för Matrix-effekten */
 }
 
 /* --- CALCULATOR CONTAINER --- */
 .calculator-container {
     background-color: rgba(26, 26, 26, 0.9);
-    padding: 30px;
+    padding: 20px;
     border-radius: 15px;
     box-shadow: 0 0 15px #FBCA61;
-    max-width: 80%;
-    margin: 50px auto; /* Ökat marginal för mer synligt Matrix */
-    text-align: center;
+    max-width: 75%; /* Mindre för att ge mer Matrix-utrymme */
+    height: 90vh; /* Säkerställer att allt får plats utan scroll */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* --- HEADER INSIDE CONTAINER --- */
 .calculator-container h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: bold;
     text-transform: uppercase;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 /* --- PICKER CONTAINER --- */
@@ -44,9 +50,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
+/* --- PICKERS (GENDER, DISTANCE) --- */
 .picker {
     display: flex;
     justify-content: center;
@@ -55,8 +62,8 @@ body {
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
-    width: 240px;
-    height: 50px;
+    width: 200px;
+    height: 45px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     white-space: nowrap;
@@ -67,9 +74,9 @@ body {
 }
 
 .option {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: #FBCA61;
-    padding: 8px 15px;
+    padding: 5px 10px;
     cursor: pointer;
     scroll-snap-align: center;
     opacity: 0.5;
@@ -88,7 +95,7 @@ body {
 
 /* --- AGE PICKER (SHOW ALL AGES) --- */
 #agePicker {
-    width: 250px;
+    width: 220px;
     height: 50px;
     overflow-x: auto;
     display: flex;
@@ -96,23 +103,29 @@ body {
     scroll-snap-type: x mandatory;
 }
 
+#agePicker .option {
+    font-size: 1.2rem;
+    padding: 5px 8px;
+    text-align: center;
+}
+
 /* --- TIME PICKER (CENTERED & HORIZONTAL) --- */
 .time-picker-container {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .time-picker {
-    width: 60px;
+    width: 50px;
     height: 90px;
     overflow-y: auto;
     scroll-snap-type: y mandatory;
     text-align: center;
     background: #1a1a1a;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
+    box-shadow: 0 0 10px rgba(251, 202, 97, 0.7);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -121,7 +134,7 @@ body {
 
 .time-picker .option {
     padding: 5px;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: #FBCA61;
     scroll-snap-align: center;
     cursor: pointer;
@@ -141,17 +154,17 @@ body {
 
 /* --- BUTTON --- */
 .calculate-button {
-    padding: 15px 20px;
-    font-size: 1.2rem;
+    padding: 10px 15px;
+    font-size: 1.1rem;
     background: #FBCA61;
     color: #000;
     border: none;
     cursor: pointer;
     border-radius: 10px;
     transition: 0.3s;
-    margin-top: 20px;
-    width: 90%;
-    max-width: 300px;
+    margin-top: 15px;
+    width: 85%;
+    max-width: 280px;
 }
 
 .calculate-button:hover {

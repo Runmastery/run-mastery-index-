@@ -36,28 +36,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
         container.scrollLeft = container.scrollWidth / 3;
 
+        let isScrolling;
         container.addEventListener("scroll", function () {
-            let options = container.querySelectorAll(".option");
-            let scrollLeft = container.scrollLeft;
-            let optionWidth = options[0].offsetWidth;
-            let centerIndex = Math.round(scrollLeft / optionWidth);
+            clearTimeout(isScrolling);
+            isScrolling = setTimeout(() => {
+                let options = container.querySelectorAll(".option");
+                let scrollLeft = container.scrollLeft;
+                let optionWidth = options[0].offsetWidth;
+                let centerIndex = Math.round(scrollLeft / optionWidth);
 
-            options.forEach((option, index) => {
-                option.classList.remove("active");
-                if (index === centerIndex) {
-                    option.classList.add("active");
-                    if (containerId === "genderPicker") selectedGender = option.dataset.value;
-                    if (containerId === "distancePicker") selectedDistance = option.dataset.value;
-                    if (containerId === "agePicker") selectedAge = option.dataset.value;
-                }
-            });
-
-            setTimeout(() => {
-                container.scrollTo({
-                    left: centerIndex * optionWidth,
-                    behavior: "smooth"
+                options.forEach((option, index) => {
+                    option.classList.remove("active");
+                    if (index === centerIndex) {
+                        option.classList.add("active");
+                        if (containerId === "genderPicker") selectedGender = option.dataset.value;
+                        if (containerId === "distancePicker") selectedDistance = option.dataset.value;
+                        if (containerId === "agePicker") selectedAge = option.dataset.value;
+                    }
                 });
-            }, 100);
+
+                requestAnimationFrame(() => {
+                    container.scrollTo({
+                        left: centerIndex * optionWidth,
+                        behavior: "smooth"
+                    });
+                });
+            }, 50);
         });
     }
 
@@ -80,29 +84,53 @@ document.addEventListener("DOMContentLoaded", function () {
             picker.appendChild(option);
         }
 
+        let isScrolling;
         picker.addEventListener("scroll", function () {
+            clearTimeout(isScrolling);
+            isScrolling = setTimeout(() => {
+                let options = picker.querySelectorAll(".option");
+                let scrollTop = picker.scrollTop;
+                let optionHeight = options[0].offsetHeight;
+                let centerIndex = Math.round(scrollTop / optionHeight);
+
+                options.forEach((option, index) => {
+                    option.classList.remove("active");
+                    if (index === centerIndex) {
+                        option.classList.add("active");
+                    }
+                });
+
+                requestAnimationFrame(() => {
+                    picker.scrollTo({
+                        top: centerIndex * optionHeight,
+                        behavior: "smooth"
+                    });
+                });
+            }, 50);
+        });
+
+        let startY, scrollStart;
+        picker.addEventListener("touchstart", function (e) {
+            startY = e.touches[0].clientY;
+            scrollStart = picker.scrollTop;
+        });
+
+        picker.addEventListener("touchmove", function (e) {
+            let deltaY = e.touches[0].clientY - startY;
+            picker.scrollTop = scrollStart - deltaY;
+        });
+
+        picker.addEventListener("touchend", function () {
             let options = picker.querySelectorAll(".option");
-            let scrollTop = picker.scrollTop;
             let optionHeight = options[0].offsetHeight;
-            let centerIndex = Math.round(scrollTop / optionHeight);
+            let centerIndex = Math.round(picker.scrollTop / optionHeight);
 
-            options.forEach((option, index) => {
-                option.classList.remove("active");
-                if (index === centerIndex) {
-                    option.classList.add("active");
-                }
-            });
-
-            setTimeout(() => {
+            requestAnimationFrame(() => {
                 picker.scrollTo({
                     top: centerIndex * optionHeight,
                     behavior: "smooth"
                 });
-            }, 100);
-        });
-
-        picker.addEventListener("mousedown", function (event) {
-            event.preventDefault();
+            });
         });
     }
 

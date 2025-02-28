@@ -2,90 +2,66 @@ document.addEventListener("DOMContentLoaded", function() {
     const calculateButton = document.getElementById("calculateBtn");
     const resultDiv = document.getElementById("result");
 
-    let selectedDistance = "10000m"; // Default distance
+    let selectedDistance = "10000m"; 
     let selectedGender = "Men";
-    let selectedAge = 25; // Default age
+    let selectedAge = 25;
 
-    // Hantera val av kön
     document.querySelectorAll("#genderPicker .option").forEach(option => {
         option.addEventListener("click", function() {
             document.querySelectorAll("#genderPicker .option").forEach(opt => opt.classList.remove("active"));
             this.classList.add("active");
             selectedGender = this.dataset.value;
-            console.log("Selected Gender:", selectedGender);
         });
     });
 
-    // Hantera val av ålder
-    const agePicker = document.getElementById("agePicker");
-    if (agePicker) {
-        for (let i = 15; i <= 85; i++) {
-        for (let i = 15; i <= 85; i += 5) {
-            const ageOption = document.createElement("div");
-            ageOption.classList.add("option");
-            ageOption.dataset.value = i;
-@@ -44,49 +44,69 @@
+    document.querySelectorAll("#distancePicker .option").forEach(option => {
+        option.addEventListener("click", function() {
+            document.querySelectorAll("#distancePicker .option").forEach(opt => opt.classList.remove("active"));
+            this.classList.add("active");
+            selectedDistance = this.dataset.value;
         });
     });
 
-    // Hantera val av tid (scroll-pickers)
-    function getTimeFromPicker(pickerId) {
-        return parseInt(document.querySelector(`#${pickerId} .option.active`)?.dataset.value) || 0;
-    }
-    // Dynamiskt generera tid för timmar, minuter och sekunder
-    const timePickers = {
-        hoursPicker: { id: "hoursPicker", min: 0, max: 23 },
-        minutesPicker: { id: "minutesPicker", min: 0, max: 59 },
-        secondsPicker: { id: "secondsPicker", min: 0, max: 59 }
-    };
-
-    Object.values(timePickers).forEach(picker => {
-        const pickerElement = document.getElementById(picker.id);
+    // Dynamiskt generera tid för timmar, minuter, sekunder
+    function createTimePicker(id, min, max) {
+        const pickerElement = document.getElementById(id);
         if (pickerElement) {
-            for (let i = picker.min; i <= picker.max; i++) {
+            for (let i = min; i <= max; i++) {
                 const option = document.createElement("div");
                 option.classList.add("option");
                 option.dataset.value = i;
                 option.textContent = i;
                 option.addEventListener("click", function() {
-                    document.querySelectorAll(`#${picker.id} .option`).forEach(opt => opt.classList.remove("active"));
+                    document.querySelectorAll(`#${id} .option`).forEach(opt => opt.classList.remove("active"));
                     this.classList.add("active");
-                    console.log(`Selected ${picker.id}:`, this.dataset.value);
                 });
                 pickerElement.appendChild(option);
             }
         }
-    });
+    }
 
-    // Beräkna-knappen
+    createTimePicker("hoursPicker", 0, 23);
+    createTimePicker("minutesPicker", 0, 59);
+    createTimePicker("secondsPicker", 0, 59);
+
     calculateButton.addEventListener("click", function() {
-        console.log("Calculate button clicked!"); // Debug-logg
-
-        const hours = getTimeFromPicker("hoursPicker");
-        const minutes = getTimeFromPicker("minutesPicker");
-        const seconds = getTimeFromPicker("secondsPicker");
         const hours = parseInt(document.querySelector("#hoursPicker .option.active")?.dataset.value) || 0;
         const minutes = parseInt(document.querySelector("#minutesPicker .option.active")?.dataset.value) || 0;
         const seconds = parseInt(document.querySelector("#secondsPicker .option.active")?.dataset.value) || 0;
+
+        const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
 
         if (!selectedDistance) {
             resultDiv.innerHTML = "<p style='color:red;'>Please select a distance.</p>";
             return;
         }
 
-        const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
-        console.log("Total time in seconds:", totalSeconds);
-
         const selectedAgeGroup = getAgeGroup(selectedGender, selectedAge);
-        console.log("Selected Age Group:", selectedAgeGroup);
-
         const index = calculateRunMasteryIndex(selectedGender, selectedAgeGroup, selectedDistance, totalSeconds);
-        console.log("Calculated Index:", index);
 
         resultDiv.innerHTML = `<p>Your Run Mastery Index: <strong>${index}</strong></p>`;
     });
 
-    // Funktion för att bestämma åldersgrupp baserat på ålder
     function getAgeGroup(gender, age) {
         if (age < 35) return gender === "Men" ? "M1-34" : "W1-34";
         if (age < 40) return gender === "Men" ? "M35" : "W35";
@@ -98,6 +74,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if (age < 75) return gender === "Men" ? "M70" : "W70";
         if (age < 80) return gender === "Men" ? "M75" : "W75";
         if (age < 85) return gender === "Men" ? "M80" : "W80";
-        return gender === "Men" ? "M85" : "W85"; // Default för 85+
+        return gender === "Men" ? "M85" : "W85";
+    }
+
+    function calculateRunMasteryIndex(gender, ageGroup, distance, userTime) {
+        const worldRecord = running_records[gender][ageGroup][distance];
+        const averageTime = 1500; // Exempelvärde, du kan hämta det riktiga från din snittdata
+
+        return 50 + 50 * ((worldRecord - userTime) / (worldRecord - averageTime));
     }
 });

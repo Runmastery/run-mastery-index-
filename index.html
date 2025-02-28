@@ -1,75 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Run Mastery Index</title>
-    <meta name="description" content="Calculate your Run Mastery Index with this interactive tool.">
-    <meta name="keywords" content="Run Mastery, running index, performance tracker, running calculator">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Se till att denna fil finns i samma katalog -->
 </head>
 <body>
-    <!-- Background Effect -->
-    <div class="matrix-background">
-        <canvas id="matrixCanvas"></canvas>
-    </div>
-
-    <!-- Page Header -->
-    <header>Calculate Your Run Mastery Index</header>
-
-    <!-- Calculator Container -->
+    <header>
+        Run Mastery Index Calculator
+    </header>
     <div class="calculator-container">
-        <!-- Gender Selection -->
+        <!-- Gender Picker -->
         <div class="picker-container">
-            <div class="picker" id="genderPicker">
-                <div class="option active" data-value="Men">Men</div>
-                <div class="option" data-value="Women">Women</div>
-            </div>
+            <div id="genderPicker" class="picker"></div>
         </div>
-
-        <!-- Age Selection -->
+        <!-- Age Picker -->
         <div class="picker-container">
-            <label for="agePicker">Select Age</label>
-            <div class="picker" id="agePicker"></div>
+            <div id="agePicker" class="picker"></div>
         </div>
-
-        <!-- Distance Selection -->
+        <!-- Distance Picker -->
         <div class="picker-container">
-            <div class="picker" id="distancePicker">
-                <div class="option active" data-value="5000m">5K</div>
-                <div class="option" data-value="10000m">10K</div>
-                <div class="option" data-value="Half Marathon">Half Marathon</div>
-                <div class="option" data-value="Marathon">Marathon</div>
-            </div>
+            <div id="distancePicker" class="picker"></div>
         </div>
-
-        <!-- Time Selection -->
+        <!-- Time Pickers -->
         <div class="time-picker-container">
-            <div>
-                <label>H</label>
-                <div class="time-picker" id="hoursPicker"></div>
-            </div>
-            <div>
-                <label>Min</label>
-                <div class="time-picker" id="minutesPicker"></div>
-            </div>
-            <div>
-                <label>Sec</label>
-                <div class="time-picker" id="secondsPicker"></div>
-            </div>
+            <div id="hoursPicker" class="time-picker"></div>
+            <div id="minutesPicker" class="time-picker"></div>
+            <div id="secondsPicker" class="time-picker"></div>
         </div>
-
         <!-- Calculate Button -->
-        <button id="calculateBtn" class="calculate-button">Generate Run Mastery Index</button>
-        
+        <button id="calculateBtn" class="calculate-button">Calculate</button>
         <!-- Result Display -->
         <div id="result"></div>
     </div>
-
-    <!-- JavaScript -->
-    <script src="matrix.js"></script>
-    <script src="records.js"></script>
-    <script src="calculator.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js"></script> <!-- Se till att denna fil finns i samma katalog -->
 </body>
 </html>

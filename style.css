@@ -17,24 +17,17 @@ body {
     background: #000000;
     overflow: hidden;
     z-index: -1;
-}
-
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    padding: 20px; /* Lägger till mer space runt för att synliggöra Matrix-effekten */
 }
 
 /* --- CALCULATOR CONTAINER --- */
 .calculator-container {
     background-color: rgba(26, 26, 26, 0.9);
-    padding: 25px;
+    padding: 30px;
     border-radius: 15px;
     box-shadow: 0 0 15px #FBCA61;
-    max-width: 85%;
-    margin: 30px auto;
+    max-width: 80%;
+    margin: 50px auto; /* Ökat marginal för mer synligt Matrix */
     text-align: center;
 }
 
@@ -43,10 +36,17 @@ canvas {
     font-size: 1.8rem;
     font-weight: bold;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-/* --- PICKERS --- */
+/* --- PICKER CONTAINER --- */
+.picker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
 .picker {
     display: flex;
     justify-content: center;
@@ -55,8 +55,8 @@ canvas {
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
-    width: 220px;
-    height: 45px;
+    width: 240px;
+    height: 50px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     white-space: nowrap;
@@ -86,36 +86,37 @@ canvas {
     opacity: 1;
 }
 
-/* --- AGE PICKER (FULL SCROLL) --- */
-.age-picker {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 10px;
-    background: #1a1a1a;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
+/* --- AGE PICKER (SHOW ALL AGES) --- */
+#agePicker {
     width: 250px;
+    height: 50px;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    display: flex;
     white-space: nowrap;
+    scroll-snap-type: x mandatory;
 }
 
-/* --- TIME PICKER (Centered Selection) --- */
+/* --- TIME PICKER (CENTERED & HORIZONTAL) --- */
+.time-picker-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
 .time-picker {
     width: 60px;
-    height: 100px;
-    overflow-y: scroll;
+    height: 90px;
+    overflow-y: auto;
     scroll-snap-type: y mandatory;
     text-align: center;
     background: #1a1a1a;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
-    padding: 5px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 5px 0;
 }
 
 .time-picker .option {
@@ -125,8 +126,7 @@ canvas {
     scroll-snap-align: center;
     cursor: pointer;
     opacity: 0.5;
-    user-select: none;
-    height: 30px; /* Gör så att det syns delvis ovan och under */
+    height: 30px;
     line-height: 30px;
 }
 

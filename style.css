@@ -1,29 +1,50 @@
-/* --- Allmänna stilar --- */
+@@ -1,61 +1,61 @@
+/* --- GENERAL STYLING --- */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #000;
+    background-color: #000000;
     color: #FBCA61;
     text-align: center;
+    overflow: hidden; /* Förhindrar scrollning */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden; /* Förhindrar sidscrollning */
+    height: 100vh; /* Använder hela höjden på skärmen */
 }
 
+/* --- BACKGROUND EFFECT --- */
+.matrix-background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    overflow: hidden;
+    z-index: -1;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- HEADER (Uppdelad i två rader) --- */
 header {
+    text-align: center;
     font-size: 1.8rem;
     font-weight: bold;
     text-transform: uppercase;
-    line-height: 1.2;
-    margin-bottom: 20px;
+    line-height: 1.2; /* Ger mer luft mellan raderna */
 }
 
+/* --- CALCULATOR CONTAINER (Anpassad för mobil) --- */
 .calculator-container {
-    background-color: rgba(26, 26, 26, 0.9);
+    background-color: rgba(26, 26, 26, 0.9); /* 10% transparens */
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 0 15px #FBCA61;
@@ -34,50 +55,19 @@ header {
     align-items: center;
 }
 
+/* --- RUBRIKER OVANFÖR VALEN --- */
+.picker-container label {
 .picker-label {
     font-size: 1rem;
     font-weight: lighter;
     color: #FBCA61;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* --- Picker-stilar --- */
-.picker-container {
-    margin-bottom: 15px;
-}
-
-.picker {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #1a1a1a;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
-    width: 100%;
-    max-width: 300px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    white-space: nowrap;
-    user-select: none;
-}
-
-.picker::-webkit-scrollbar {
-    display: none; /* Dölj scrollbar för WebKit-baserade webbläsare */
-}
-
-.option {
-    font-size: 1.3rem;
-    color: #FBCA61;
-    padding: 8px 15px;
-    cursor: pointer;
+@@ -93,83 +93,86 @@
     scroll-snap-align: center;
     opacity: 0.5;
     user-select: none;
-    flex-shrink: 0;
+    display: inline-block;
+    width: 80px;
+    text-align: center;
 }
 
 .option.active {
@@ -89,7 +79,7 @@ header {
     opacity: 1;
 }
 
-/* --- Tidsväljare --- */
+/* --- TIME PICKER (Fixad jämn scroll och klickbar) --- */
 .time-picker-container {
     display: flex;
     justify-content: center;
@@ -100,7 +90,7 @@ header {
 .time-picker {
     width: 60px;
     height: 80px;
-    overflow-y: auto;
+    overflow-y: hidden; /* Förhindrar att dra ut siffrorna */
     scroll-snap-type: y mandatory;
     text-align: center;
     background: #1a1a1a;
@@ -110,11 +100,11 @@ header {
     user-select: none;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
 }
 
 .time-picker::-webkit-scrollbar {
-    display: none; /* Dölj scrollbar för WebKit-baserade webbläsare */
+    display: none;
 }
 
 .time-picker .option {
@@ -136,7 +126,7 @@ header {
     opacity: 1;
 }
 
-/* --- Beräkningsknapp --- */
+/* --- CALCULATE BUTTON (Luftigare & snyggare) --- */
 .calculate-button {
     padding: 15px 20px;
     font-size: 1.2rem;
@@ -145,7 +135,7 @@ header {
     border: none;
     cursor: pointer;
     border-radius: 10px;
-    transition: background 0.3s, transform 0.1s;
+    transition: 0.3s;
     margin-top: 10px;
     width: 90%;
     max-width: 300px;

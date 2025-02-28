@@ -55,7 +55,7 @@ header {
 }
 
 /* --- RUBRIKER OVANFÖR VALEN --- */
-.picker-container label {
+.picker-label {
     font-size: 1rem;
     font-weight: lighter;
     color: #FBCA61;
@@ -93,6 +93,9 @@ header {
     scroll-snap-align: center;
     opacity: 0.5;
     user-select: none;
+    display: inline-block;
+    width: 80px;
+    text-align: center;
 }
 
 .option.active {

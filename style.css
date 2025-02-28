@@ -102,7 +102,7 @@ header {
     display: none;
 }
 
-/* --- AGE PICKER (VERTICAL) --- */
+/* --- AGE PICKER (VERTICAL 15-85 YEARS) --- */
 .age-picker {
     display: flex;
     flex-direction: column;
@@ -119,6 +119,19 @@ header {
 .age-picker .option {
     scroll-snap-align: center;
     padding: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.age-picker .option.active {
+    background: #FBCA61;
+    color: #000;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.age-picker::-webkit-scrollbar {
+    display: none;
 }
 
 /* --- TIME PICKER (VERTICAL) --- */

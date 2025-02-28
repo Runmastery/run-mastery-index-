@@ -1,3 +1,68 @@
+/* --- GENERAL STYLING --- */
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    color: #FBCA61;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+/* --- BACKGROUND EFFECT --- */
+.matrix-background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    overflow: hidden;
+    z-index: -1;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- HEADER --- */
+header {
+    text-align: center;
+    padding: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* --- CALCULATOR CONTAINER --- */
+.calculator-container {
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #FBCA61;
+    max-width: 90%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+/* --- PICKER STYLING --- */
+.picker-container {
+    margin: 15px auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.picker-container label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #FBCA61;
+}
+
+/* --- GENDER & DISTANCE PICKERS (Infinite Scroll) --- */
 .picker {
     display: flex;
     justify-content: center;
@@ -6,16 +71,17 @@
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
-    width: 250px;
+    width: 230px;
+    height: 50px;
     overflow-x: hidden;
-    white-space: nowrap;
     scroll-snap-type: x mandatory;
+    white-space: nowrap;
 }
 
 .option {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: #FBCA61;
-    padding: 10px 20px;
+    padding: 8px 15px;
     cursor: pointer;
     scroll-snap-align: center;
     opacity: 0.5;
@@ -30,10 +96,46 @@
     opacity: 1;
 }
 
-/* --- TIME PICKER --- */
+/* --- AGE PICKER (SCROLLBAR FIX) --- */
+.age-picker {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    background: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
+    padding: 10px 0;
+    width: 250px;
+}
+
+.age-picker .option {
+    padding: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.age-picker .option.active {
+    background: #FBCA61;
+    color: #000;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+/* --- TIME PICKER (SCROLL FIX) --- */
+.time-picker-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
 .time-picker {
-    width: 70px;
-    height: 90px;
+    width: 60px;
+    height: 75px;
     overflow-y: auto;
     scroll-snap-type: y mandatory;
     text-align: center;
@@ -45,7 +147,7 @@
 
 .time-picker .option {
     padding: 5px;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: #FBCA61;
     scroll-snap-align: center;
     cursor: pointer;
@@ -59,4 +161,27 @@
     font-weight: bold;
     transform: scale(1.1);
     opacity: 1;
+}
+
+/* --- CALCULATE BUTTON FIX --- */
+.calculate-button {
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    background: #FBCA61;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.3s;
+    margin-top: 20px;
+    width: 90%;
+    max-width: 300px;
+}
+
+.calculate-button:hover {
+    background: #e0b04f;
+}
+
+.calculate-button:active {
+    transform: scale(0.98);
 }

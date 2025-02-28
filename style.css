@@ -27,16 +27,21 @@ canvas {
     height: 100%;
 }
 
-/* --- HEADER (Lite mindre och mer luft) --- */
+/* --- HEADER (Uppdelad i två rader) --- */
 header {
     text-align: center;
     padding: 15px;
     font-size: 1.8rem;
     font-weight: bold;
     text-transform: uppercase;
+    line-height: 1.2; /* Ger mer luft mellan raderna */
 }
 
-/* --- CALCULATOR CONTAINER (Lite mindre och med transparens) --- */
+header span {
+    display: block;
+}
+
+/* --- CALCULATOR CONTAINER (Med transparens) --- */
 .calculator-container {
     background-color: rgba(26, 26, 26, 0.9); /* 10% transparens */
     padding: 25px;
@@ -65,7 +70,7 @@ header {
     letter-spacing: 1px;
 }
 
-/* --- GENDER & DISTANCE PICKERS (Infinite Scroll + Klickbar) --- */
+/* --- GENDER, AGE, DISTANCE (Infinite Scroll + Klickbar) --- */
 .picker {
     display: flex;
     justify-content: center;
@@ -79,6 +84,7 @@ header {
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     white-space: nowrap;
+    user-select: none;
 }
 
 .picker::-webkit-scrollbar {
@@ -104,7 +110,7 @@ header {
     opacity: 1;
 }
 
-/* --- AGE PICKER (Fixar att den inte är tom) --- */
+/* --- AGE PICKER (Fixat att den inte är tom + jämn scroll) --- */
 .age-picker {
     display: flex;
     flex-direction: row;
@@ -118,6 +124,7 @@ header {
     box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
     padding: 10px 0;
     width: 250px;
+    user-select: none;
 }
 
 .age-picker::-webkit-scrollbar {
@@ -139,7 +146,7 @@ header {
     opacity: 1;
 }
 
-/* --- TIME PICKER (Scrollar jämnare och stabilare) --- */
+/* --- TIME PICKER (Fixad jämn scroll och klickbar) --- */
 .time-picker-container {
     display: flex;
     justify-content: center;
@@ -149,7 +156,7 @@ header {
 
 .time-picker {
     width: 60px;
-    height: 70px;
+    height: 80px;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     text-align: center;
@@ -157,6 +164,7 @@ header {
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
     padding: 5px 0;
+    user-select: none;
 }
 
 .time-picker::-webkit-scrollbar {

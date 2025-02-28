@@ -6,58 +6,59 @@ document.addEventListener("DOMContentLoaded", function () {
     let selectedGender = "Men";
     let selectedAge = 25; // Default age
 
-    /** --- Lägger till rubriker ovanför valen --- */
-    function addLabels() {
-        document.getElementById("genderPicker").insertAdjacentHTML("beforebegin", "<label class='picker-label'>Gender</label>");
-        document.getElementById("agePicker").insertAdjacentHTML("beforebegin", "<label class='picker-label'>Age</label>");
-        document.getElementById("distancePicker").insertAdjacentHTML("beforebegin", "<label class='picker-label'>Distance</label>");
-    }
-    addLabels();
-
-    /** --- Infinite Scroll för Gender & Distance (fixat statiskt val) --- */
-    function setupInfiniteScroll(containerId, optionsArray) {
+    /** --- Infinite Scroll för Gender, Age och Distance --- */
+    function setupHorizontalScroll(containerId, optionsArray) {
         const container = document.getElementById(containerId);
         container.innerHTML = "";
 
-        optionsArray.forEach((optionText) => {
+        // Loopa listan tre gånger för en sömlös infinite scroll
+        optionsArray = [...optionsArray, ...optionsArray, ...optionsArray];
+
+        optionsArray.forEach(optionText => {
             const option = document.createElement("div");
             option.classList.add("option");
             option.dataset.value = optionText;
             option.textContent = optionText;
-            option.addEventListener("click", function () {
-                document.querySelectorAll(`#${containerId} .option`).forEach(opt => opt.classList.remove("active"));
-                this.classList.add("active");
-                if (containerId === "genderPicker") selectedGender = this.dataset.value;
-                if (containerId === "distancePicker") selectedDistance = this.dataset.value;
-                console.log(`Selected ${containerId}:`, this.dataset.value);
-            });
             container.appendChild(option);
+        });
+
+        // Centrerar scrollningen i mitten
+        container.scrollLeft = container.scrollWidth / 3;
+
+        container.addEventListener("scroll", function () {
+            let options = container.querySelectorAll(".option");
+            let scrollLeft = container.scrollLeft;
+            let optionWidth = options[0].offsetWidth;
+            let centerIndex = Math.round(scrollLeft / optionWidth);
+
+            options.forEach((option, index) => {
+                option.classList.remove("active");
+                if (index === centerIndex) {
+                    option.classList.add("active");
+                    if (containerId === "genderPicker") selectedGender = option.dataset.value;
+                    if (containerId === "distancePicker") selectedDistance = option.dataset.value;
+                    if (containerId === "agePicker") selectedAge = option.dataset.value;
+                }
+            });
+
+            // Snäpp tillbaka till exakt rätt position
+            setTimeout(() => {
+                container.scrollTo({
+                    left: centerIndex * optionWidth,
+                    behavior: "smooth"
+                });
+            }, 100);
         });
     }
 
-    setupInfiniteScroll("genderPicker", ["Men", "Women"]);
-    setupInfiniteScroll("distancePicker", ["5K", "10K", "Half Marathon", "Marathon"]);
+    setupHorizontalScroll("genderPicker", ["Men", "Women"]);
+    setupHorizontalScroll("distancePicker", ["5K", "10K", "Half Marathon", "Marathon"]);
+    
+    // Generera ålder korrekt
+    const ageArray = Array.from({ length: 71 }, (_, i) => (i + 15).toString());
+    setupHorizontalScroll("agePicker", ageArray);
 
-    /** --- Hantera val av ålder --- */
-    const agePicker = document.getElementById("agePicker");
-    if (agePicker) {
-        agePicker.innerHTML = "";
-        for (let i = 15; i <= 85; i++) {
-            const ageOption = document.createElement("div");
-            ageOption.classList.add("option");
-            ageOption.dataset.value = i;
-            ageOption.textContent = i;
-            ageOption.addEventListener("click", function () {
-                document.querySelectorAll("#agePicker .option").forEach(opt => opt.classList.remove("active"));
-                this.classList.add("active");
-                selectedAge = this.dataset.value;
-                console.log("Selected Age:", selectedAge);
-            });
-            agePicker.appendChild(ageOption);
-        }
-    }
-
-    /** --- Dynamisk scroll för tidspickern med iOS-känsla --- */
+    /** --- Vertikal scroll för Tidspickern (iOS-hjul) --- */
     function setupTimePicker(pickerId, min, max) {
         const picker = document.getElementById(pickerId);
         picker.innerHTML = "";
@@ -83,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
 
-            // Snäpp tillbaka till exakt rätt position för en jämn scroll
+            // Snäpp tillbaka till exakt rätt position
             setTimeout(() => {
                 picker.scrollTo({
                     top: centerIndex * optionHeight,

@@ -1,38 +1,39 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const ageInput = document.getElementById("age");
-    const ageValue = document.getElementById("age-value");
     const calculateButton = document.getElementById("calculateBtn");
     const resultDiv = document.getElementById("result");
 
-    let selectedDistance = null;
+    let selectedDistance = "10000m"; // Default distance
     let selectedGender = "Men";
     let selectedAgeGroup = "M1-34"; // Default age group
 
-    // Uppdatera åldervärde och åldersgrupp
-    ageInput.addEventListener("input", function() {
-        ageValue.textContent = ageInput.value;
-        selectedAgeGroup = getAgeGroup(selectedGender, ageInput.value);
+    // Hantera val av kön
+    document.querySelectorAll("#genderPicker .option").forEach(option => {
+        option.addEventListener("click", function() {
+            document.querySelectorAll("#genderPicker .option").forEach(opt => opt.classList.remove("active"));
+            this.classList.add("active");
+            selectedGender = this.dataset.value;
+            selectedAgeGroup = getAgeGroup(selectedGender, selectedAgeGroup);
+            console.log("Selected Gender:", selectedGender);
+        });
     });
 
-    // Välj kön
-    document.getElementById("maleBtn").addEventListener("click", function() {
-        selectedGender = "Men";
-        selectedAgeGroup = getAgeGroup(selectedGender, ageInput.value);
-        highlightSelectedButton(this, document.querySelectorAll(".gender-btn"));
+    // Hantera val av åldersgrupp
+    document.querySelectorAll("#agePicker .option").forEach(option => {
+        option.addEventListener("click", function() {
+            document.querySelectorAll("#agePicker .option").forEach(opt => opt.classList.remove("active"));
+            this.classList.add("active");
+            selectedAgeGroup = this.dataset.value;
+            console.log("Selected Age Group:", selectedAgeGroup);
+        });
     });
 
-    document.getElementById("femaleBtn").addEventListener("click", function() {
-        selectedGender = "Women";
-        selectedAgeGroup = getAgeGroup(selectedGender, ageInput.value);
-        highlightSelectedButton(this, document.querySelectorAll(".gender-btn"));
-    });
-
-    // Välj distans
-    document.querySelectorAll(".distance-btn").forEach(button => {
-        button.addEventListener("click", function() {
-            selectedDistance = this.getAttribute("data-distance");
-            highlightSelectedButton(this, document.querySelectorAll(".distance-btn"));
-            console.log("Selected distance:", selectedDistance); // Debugging
+    // Hantera val av distans
+    document.querySelectorAll("#distancePicker .option").forEach(option => {
+        option.addEventListener("click", function() {
+            document.querySelectorAll("#distancePicker .option").forEach(opt => opt.classList.remove("active"));
+            this.classList.add("active");
+            selectedDistance = this.dataset.value;
+            console.log("Selected Distance:", selectedDistance);
         });
     });
 
@@ -50,34 +51,27 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
-        console.log("Total time in seconds:", totalSeconds); // Debug-logg
+        console.log("Total time in seconds:", totalSeconds);
 
         const index = calculateRunMasteryIndex(selectedGender, selectedAgeGroup, selectedDistance, totalSeconds);
-        console.log("Calculated Index:", index); // Debug-logg
+        console.log("Calculated Index:", index);
 
         resultDiv.innerHTML = `<p>Your Run Mastery Index: <strong>${index}</strong></p>`;
     });
 
     // Funktion för att bestämma åldersgrupp baserat på inmatad ålder
-   function getAgeGroup(gender, age) {
-    if (age < 35) return gender === "Men" ? "M1-34" : "W1-34";
-    if (age < 40) return gender === "Men" ? "M35" : "W35";
-    if (age < 45) return gender === "Men" ? "M40" : "W40";
-    if (age < 50) return gender === "Men" ? "M45" : "W45";
-    if (age < 55) return gender === "Men" ? "M50" : "W50";
-    if (age < 60) return gender === "Men" ? "M55" : "W55";
-    if (age < 65) return gender === "Men" ? "M60" : "W60";
-    if (age < 70) return gender === "Men" ? "M65" : "W65";
-    if (age < 75) return gender === "Men" ? "M70" : "W70";
-    if (age < 80) return gender === "Men" ? "M75" : "W75";
-    if (age < 85) return gender === "Men" ? "M80" : "W80";
-    return gender === "Men" ? "M85" : "W85"; // Default för 85+
-}
-
-
-    // Funktion för att markera vald knapp
-    function highlightSelectedButton(selectedButton, buttonGroup) {
-        buttonGroup.forEach(button => button.classList.remove("active"));
-        selectedButton.classList.add("active");
+    function getAgeGroup(gender, ageGroup) {
+        if (ageGroup === "1-34") return gender === "Men" ? "M1-34" : "W1-34";
+        if (ageGroup === "M35") return "M35";
+        if (ageGroup === "M40") return "M40";
+        if (ageGroup === "M45") return "M45";
+        if (ageGroup === "M50") return "M50";
+        if (ageGroup === "M55") return "M55";
+        if (ageGroup === "M60") return "M60";
+        if (ageGroup === "M65") return "M65";
+        if (ageGroup === "M70") return "M70";
+        if (ageGroup === "M75") return "M75";
+        if (ageGroup === "M80") return "M80";
+        return "M85"; // Default för 85+
     }
 });

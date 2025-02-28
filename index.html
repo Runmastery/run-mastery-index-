@@ -32,14 +32,8 @@
 
         <!-- Age Selection -->
         <div class="picker-container">
-            <label for="agePicker">Select Age Group</label>
-            <div class="picker" id="agePicker">
-                <div class="option" data-value="1-34">1-34</div>
-                <div class="option active" data-value="M35">35-39</div>
-                <div class="option" data-value="M40">40-44</div>
-                <div class="option" data-value="M45">45-49</div>
-                <div class="option" data-value="M50">50-54</div>
-            </div>
+            <label for="agePicker">Select Age</label>
+            <div class="picker age-picker" id="agePicker"></div>
         </div>
 
         <!-- Distance Selection -->
@@ -53,12 +47,12 @@
             </div>
         </div>
 
-        <!-- Time Input -->
+        <!-- Time Selection -->
         <h3>Enter Your Time</h3>
-        <div class="time-inputs">
-            <input type="number" id="hours" placeholder="Hours" min="0">
-            <input type="number" id="minutes" placeholder="Minutes" min="0" max="59">
-            <input type="number" id="seconds" placeholder="Seconds" min="0" max="59">
+        <div class="time-picker-container">
+            <div class="time-picker" id="hoursPicker"></div>
+            <div class="time-picker" id="minutesPicker"></div>
+            <div class="time-picker" id="secondsPicker"></div>
         </div>
 
         <!-- Calculate Button -->

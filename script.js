@@ -77,4 +77,23 @@ document.addEventListener("DOMContentLoaded", function() {
         if (age < 85) return gender === "Men" ? "M80" : "W80";
         return gender === "Men" ? "M85" : "W85"; // Default för 85+
     }
+// Dynamiskt generera åldersval från 15 till 85
+const agePicker = document.getElementById("agePicker");
+
+if (agePicker) {
+    for (let i = 15; i <= 85; i++) {
+        const ageOption = document.createElement("div");
+        ageOption.classList.add("option");
+        ageOption.dataset.value = i;
+        ageOption.textContent = i;
+        ageOption.addEventListener("click", function() {
+            document.querySelectorAll("#agePicker .option").forEach(opt => opt.classList.remove("active"));
+            this.classList.add("active");
+            selectedAge = this.dataset.value;
+            console.log("Selected Age:", selectedAge);
+        });
+        agePicker.appendChild(ageOption);
+    }
+}
+
 });

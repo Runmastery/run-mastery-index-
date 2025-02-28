@@ -150,5 +150,40 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+document.addEventListener("DOMContentLoaded", function() {
+    const timePickers = document.querySelectorAll(".time-picker");
+
+    timePickers.forEach(picker => {
+        picker.addEventListener("scroll", function() {
+            let options = picker.querySelectorAll(".option");
+            let scrollTop = picker.scrollTop;
+            let optionHeight = options[0].offsetHeight;
+            let centerIndex = Math.round(scrollTop / optionHeight);
+
+            options.forEach((option, index) => {
+                option.classList.remove("active");
+                if (index === centerIndex) {
+                    option.classList.add("active");
+                }
+            });
+
+            // Snäpp tillbaka till exakt rätt position
+            setTimeout(() => {
+                picker.scrollTo({
+                    top: centerIndex * optionHeight,
+                    behavior: "smooth"
+                });
+            }, 100);
+        });
+    });
+
+    // Förhindra att tidspickern kan dras utanför sin position
+    timePickers.forEach(picker => {
+        picker.addEventListener("mousedown", function(event) {
+            event.preventDefault();
+        });
+    });
+
+});
 
 });

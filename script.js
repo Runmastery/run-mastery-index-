@@ -22,8 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const container = document.getElementById(containerId);
         container.innerHTML = "";
         
-        optionsArray = [...optionsArray, ...optionsArray, ...optionsArray];
-        
         optionsArray.forEach(optionText => {
             const option = document.createElement("div");
             option.classList.add("option");
@@ -32,36 +30,23 @@ document.addEventListener("DOMContentLoaded", function () {
             container.appendChild(option);
         });
 
-        container.scrollLeft = container.scrollWidth / 3;
+        container.scrollLeft = container.scrollWidth / 2 - container.offsetWidth / 2;
         
-        let isScrolling;
         container.addEventListener("scroll", function () {
-            clearTimeout(isScrolling);
-            isScrolling = setTimeout(() => {
-                let options = container.querySelectorAll(".option");
-                let scrollLeft = container.scrollLeft;
-                let optionWidth = options[0].offsetWidth;
-                let centerIndex = Math.round(scrollLeft / optionWidth);
+            let options = container.querySelectorAll(".option");
+            let scrollLeft = container.scrollLeft;
+            let optionWidth = options[0].offsetWidth;
+            let centerIndex = Math.round(scrollLeft / optionWidth);
 
-                let newScrollLeft = centerIndex * optionWidth;
-
-                options.forEach((option, index) => {
-                    option.classList.remove("active");
-                    if (index === centerIndex) {
-                        option.classList.add("active");
-                        if (containerId === "genderPicker") selectedGender = option.dataset.value;
-                        if (containerId === "distancePicker") selectedDistance = option.dataset.value;
-                        if (containerId === "agePicker") selectedAge = option.dataset.value;
-                    }
-                });
-
-                setTimeout(() => {
-                    container.scrollTo({
-                        left: newScrollLeft,
-                        behavior: "smooth"
-                    });
-                }, 50);
-            }, 200);
+            options.forEach((option, index) => {
+                option.classList.remove("active");
+                if (index === centerIndex) {
+                    option.classList.add("active");
+                    if (containerId === "genderPicker") selectedGender = option.dataset.value;
+                    if (containerId === "distancePicker") selectedDistance = option.dataset.value;
+                    if (containerId === "agePicker") selectedAge = option.dataset.value;
+                }
+            });
         });
     }
 
@@ -83,29 +68,18 @@ document.addEventListener("DOMContentLoaded", function () {
             picker.appendChild(option);
         }
 
-        let isScrolling;
         picker.addEventListener("scroll", function () {
-            clearTimeout(isScrolling);
-            isScrolling = setTimeout(() => {
-                let options = picker.querySelectorAll(".option");
-                let scrollTop = picker.scrollTop;
-                let optionHeight = options[0].offsetHeight;
-                let centerIndex = Math.round(scrollTop / optionHeight);
+            let options = picker.querySelectorAll(".option");
+            let scrollTop = picker.scrollTop;
+            let optionHeight = options[0].offsetHeight;
+            let centerIndex = Math.round(scrollTop / optionHeight);
 
-                options.forEach((option, index) => {
-                    option.classList.remove("active");
-                    if (index === centerIndex) {
-                        option.classList.add("active");
-                    }
-                });
-
-                requestAnimationFrame(() => {
-                    picker.scrollTo({
-                        top: centerIndex * optionHeight,
-                        behavior: "smooth"
-                    });
-                });
-            }, 200);
+            options.forEach((option, index) => {
+                option.classList.remove("active");
+                if (index === centerIndex) {
+                    option.classList.add("active");
+                }
+            });
         });
     }
 

@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Hantera val av ålder
     const agePicker = document.getElementById("agePicker");
     if (agePicker) {
-        for (let i = 15; i <= 85; i++) {
+        for (let i = 15; i <= 85; i += 5) {
             const ageOption = document.createElement("div");
             ageOption.classList.add("option");
             ageOption.dataset.value = i;
@@ -44,18 +44,38 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Hantera val av tid (scroll-pickers)
-    function getTimeFromPicker(pickerId) {
-        return parseInt(document.querySelector(`#${pickerId} .option.active`)?.dataset.value) || 0;
-    }
+    // Dynamiskt generera tid för timmar, minuter och sekunder
+    const timePickers = {
+        hoursPicker: { id: "hoursPicker", min: 0, max: 23 },
+        minutesPicker: { id: "minutesPicker", min: 0, max: 59 },
+        secondsPicker: { id: "secondsPicker", min: 0, max: 59 }
+    };
+
+    Object.values(timePickers).forEach(picker => {
+        const pickerElement = document.getElementById(picker.id);
+        if (pickerElement) {
+            for (let i = picker.min; i <= picker.max; i++) {
+                const option = document.createElement("div");
+                option.classList.add("option");
+                option.dataset.value = i;
+                option.textContent = i;
+                option.addEventListener("click", function() {
+                    document.querySelectorAll(`#${picker.id} .option`).forEach(opt => opt.classList.remove("active"));
+                    this.classList.add("active");
+                    console.log(`Selected ${picker.id}:`, this.dataset.value);
+                });
+                pickerElement.appendChild(option);
+            }
+        }
+    });
 
     // Beräkna-knappen
     calculateButton.addEventListener("click", function() {
         console.log("Calculate button clicked!"); // Debug-logg
 
-        const hours = getTimeFromPicker("hoursPicker");
-        const minutes = getTimeFromPicker("minutesPicker");
-        const seconds = getTimeFromPicker("secondsPicker");
+        const hours = parseInt(document.querySelector("#hoursPicker .option.active")?.dataset.value) || 0;
+        const minutes = parseInt(document.querySelector("#minutesPicker .option.active")?.dataset.value) || 0;
+        const seconds = parseInt(document.querySelector("#secondsPicker .option.active")?.dataset.value) || 0;
 
         if (!selectedDistance) {
             resultDiv.innerHTML = "<p style='color:red;'>Please select a distance.</p>";

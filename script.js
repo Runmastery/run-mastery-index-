@@ -54,33 +54,36 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    /** --- Dynamisk scroll för Time --- */
-    const timePickers = {
-        hoursPicker: { id: "hoursPicker", min: 0, max: 23 },
-        minutesPicker: { id: "minutesPicker", min: 0, max: 59 },
-        secondsPicker: { id: "secondsPicker", min: 0, max: 59 }
-    };
+    /** --- Dynamisk scroll för Time (Fixat studseffekt & centrering) --- */
+    const timePickers = document.querySelectorAll(".time-picker");
 
-    Object.values(timePickers).forEach(picker => {
-        const pickerElement = document.getElementById(picker.id);
-        if (pickerElement) {
-            pickerElement.innerHTML = "";
-            for (let i = picker.min; i <= picker.max; i++) {
-                const option = document.createElement("div");
-                option.classList.add("option");
-                option.dataset.value = i;
-                option.textContent = i;
-                pickerElement.appendChild(option);
-            }
+    timePickers.forEach(picker => {
+        picker.addEventListener("scroll", function () {
+            let options = picker.querySelectorAll(".option");
+            let scrollTop = picker.scrollTop;
+            let optionHeight = options[0].offsetHeight;
+            let centerIndex = Math.round(scrollTop / optionHeight);
 
-            // Gör att man kan scrolla jämnt utan studs
-            pickerElement.addEventListener("scroll", () => {
-                let options = pickerElement.querySelectorAll(".option");
-                let midIndex = Math.round(pickerElement.scrollTop / options[0].offsetHeight);
-                options.forEach(opt => opt.classList.remove("active"));
-                options[midIndex]?.classList.add("active");
+            options.forEach((option, index) => {
+                option.classList.remove("active");
+                if (index === centerIndex) {
+                    option.classList.add("active");
+                }
             });
-        }
+
+            // Snäpp tillbaka till exakt rätt position
+            setTimeout(() => {
+                picker.scrollTo({
+                    top: centerIndex * optionHeight,
+                    behavior: "smooth"
+                });
+            }, 100);
+        });
+
+        // Förhindra att tidspickern kan dras utanför sin position
+        picker.addEventListener("mousedown", function (event) {
+            event.preventDefault();
+        });
     });
 
     /** --- Beräkna-knappen --- */
@@ -123,67 +126,4 @@ document.addEventListener("DOMContentLoaded", function () {
         if (age < 85) return gender === "Men" ? "M80" : "W80";
         return gender === "Men" ? "M85" : "W85";
     }
-document.addEventListener("DOMContentLoaded", function() {
-    const timePickers = document.querySelectorAll(".time-picker");
-
-    timePickers.forEach(picker => {
-        picker.addEventListener("scroll", function() {
-            let options = picker.querySelectorAll(".option");
-            let scrollTop = picker.scrollTop;
-            let optionHeight = options[0].offsetHeight;
-            let centerIndex = Math.round(scrollTop / optionHeight);
-
-            options.forEach((option, index) => {
-                option.classList.remove("active");
-                if (index === centerIndex) {
-                    option.classList.add("active");
-                }
-            });
-
-            // Snäpp tillbaka till exakt rätt position
-            setTimeout(() => {
-                picker.scrollTo({
-                    top: centerIndex * optionHeight,
-                    behavior: "smooth"
-                });
-            }, 100);
-        });
-    });
-});
-document.addEventListener("DOMContentLoaded", function() {
-    const timePickers = document.querySelectorAll(".time-picker");
-
-    timePickers.forEach(picker => {
-        picker.addEventListener("scroll", function() {
-            let options = picker.querySelectorAll(".option");
-            let scrollTop = picker.scrollTop;
-            let optionHeight = options[0].offsetHeight;
-            let centerIndex = Math.round(scrollTop / optionHeight);
-
-            options.forEach((option, index) => {
-                option.classList.remove("active");
-                if (index === centerIndex) {
-                    option.classList.add("active");
-                }
-            });
-
-            // Snäpp tillbaka till exakt rätt position
-            setTimeout(() => {
-                picker.scrollTo({
-                    top: centerIndex * optionHeight,
-                    behavior: "smooth"
-                });
-            }, 100);
-        });
-    });
-
-    // Förhindra att tidspickern kan dras utanför sin position
-    timePickers.forEach(picker => {
-        picker.addEventListener("mousedown", function(event) {
-            event.preventDefault();
-        });
-    });
-
-});
-
 });

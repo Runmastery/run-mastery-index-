@@ -28,11 +28,8 @@ canvas {
 }
 
 /* --- HEADER --- */
-/* --- HEADER (Lite mindre och mer luft) --- */
 header {
     text-align: center;
-    padding: 20px;
-    font-size: 2rem;
     padding: 15px;
     font-size: 1.8rem;
     font-weight: bold;
@@ -40,15 +37,10 @@ header {
 }
 
 /* --- CALCULATOR CONTAINER --- */
-/* --- CALCULATOR CONTAINER (Lite mindre och med transparens) --- */
 .calculator-container {
-    background-color: #1a1a1a;
-    padding: 30px;
-    background-color: rgba(26, 26, 26, 0.9); /* 10% transparens */
+    background-color: rgba(26, 26, 26, 0.9);
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 0 20px #FBCA61;
-    max-width: 90%;
     box-shadow: 0 0 15px #FBCA61;
     max-width: 85%;
     margin: 30px auto;
@@ -56,16 +48,15 @@ header {
 }
 
 /* --- PICKER STYLING --- */
-/* --- PICKER STYLING (Åtgärdar klickproblem) --- */
 .picker-container {
     margin: 15px auto;
     text-align: center;
-@@ -57,12 +57,15 @@
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .picker-container label {
-    font-size: 1.2rem;
-    font-weight: bold;
     font-size: 1rem;
     font-weight: lighter;
     color: #FBCA61;
@@ -74,21 +65,18 @@ header {
     letter-spacing: 1px;
 }
 
-/* --- GENDER & DISTANCE PICKERS (Infinite Scroll) --- */
-/* --- GENDER & DISTANCE PICKERS (Infinite Scroll + Klickbar) --- */
+/* --- PICKER BOXES (Infinite Scroll + Clickable) --- */
 .picker {
     display: flex;
     justify-content: center;
-@@ -71,20 +74,25 @@
+    align-items: center;
+    background: #1a1a1a;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
-    width: 230px;
-    height: 50px;
-    overflow-x: hidden;
     width: 220px;
     height: 45px;
-    overflow-x: scroll;
+    overflow-x: auto;
     scroll-snap-type: x mandatory;
     white-space: nowrap;
 }
@@ -98,7 +86,6 @@ header {
 }
 
 .option {
-    font-size: 1.4rem;
     font-size: 1.3rem;
     color: #FBCA61;
     padding: 8px 15px;
@@ -106,20 +93,32 @@ header {
     scroll-snap-align: center;
     opacity: 0.5;
     user-select: none;
+    transition: 0.3s;
 }
 
 .option.active {
-@@ -96,7 +104,7 @@
+    color: #000;
+    background-color: #FBCA61;
+    border-radius: 10px;
+    font-weight: bold;
+    transform: scale(1.1);
     opacity: 1;
 }
 
-/* --- AGE PICKER (SCROLLBAR FIX) --- */
-/* --- AGE PICKER (Fixar att den inte är tom) --- */
+/* --- AGE PICKER --- */
 .age-picker {
     display: flex;
     flex-direction: row;
-@@ -112,20 +120,26 @@
+    justify-content: center;
+    gap: 10px;
+    background: #1a1a1a;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
     width: 250px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    white-space: nowrap;
 }
 
 .age-picker::-webkit-scrollbar {
@@ -128,7 +127,6 @@ header {
 
 .age-picker .option {
     padding: 10px;
-    font-size: 1.5rem;
     font-size: 1.4rem;
     cursor: pointer;
     opacity: 0.5;
@@ -142,23 +140,23 @@ header {
     opacity: 1;
 }
 
-/* --- TIME PICKER (SCROLL FIX) --- */
-/* --- TIME PICKER (Scrollar jämnare och stabilare) --- */
+/* --- TIME PICKER --- */
 .time-picker-container {
     display: flex;
     justify-content: center;
-@@ -135,8 +149,8 @@
+    gap: 10px;
+    margin-top: 20px;
+}
 
 .time-picker {
     width: 60px;
-    height: 75px;
-    overflow-y: auto;
     height: 70px;
-    overflow-y: scroll;
+    overflow-y: auto;
     scroll-snap-type: y mandatory;
     text-align: center;
     background: #1a1a1a;
-@@ -145,13 +159,18 @@
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
     padding: 5px 0;
 }
 
@@ -177,12 +175,14 @@ header {
 }
 
 .time-picker .option.active {
-@@ -163,25 +182,25 @@
+    background: #FBCA61;
+    color: #000;
+    font-weight: bold;
+    border-radius: 10px;
     opacity: 1;
 }
 
-/* --- CALCULATE BUTTON FIX --- */
-/* --- CALCULATE BUTTON (Luftigare & snyggare) --- */
+/* --- CALCULATE BUTTON --- */
 .calculate-button {
     padding: 15px 20px;
     font-size: 1.2rem;

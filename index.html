@@ -7,33 +7,57 @@
     <link rel="stylesheet" href="styles.css"> <!-- Se till att denna fil finns i samma katalog -->
 </head>
 <body>
+    <div class="matrix-background">
+        <canvas id="matrixCanvas"></canvas>
+    </div>
+
     <header>
         Run Mastery Index Calculator
     </header>
+
     <div class="calculator-container">
         <!-- Gender Picker -->
         <div class="picker-container">
+            <div class="picker-label">GENDER</div>
             <div id="genderPicker" class="picker"></div>
         </div>
+
         <!-- Age Picker -->
         <div class="picker-container">
+            <div class="picker-label">AGE</div>
             <div id="agePicker" class="picker"></div>
         </div>
+
         <!-- Distance Picker -->
         <div class="picker-container">
+            <div class="picker-label">DISTANCE</div>
             <div id="distancePicker" class="picker"></div>
         </div>
+
         <!-- Time Pickers -->
         <div class="time-picker-container">
-            <div id="hoursPicker" class="time-picker"></div>
-            <div id="minutesPicker" class="time-picker"></div>
-            <div id="secondsPicker" class="time-picker"></div>
+            <div class="time-picker-box">
+                <div class="picker-label">HOURS</div>
+                <div id="hoursPicker" class="time-picker"></div>
+            </div>
+            <div class="time-picker-box">
+                <div class="picker-label">MINUTES</div>
+                <div id="minutesPicker" class="time-picker"></div>
+            </div>
+            <div class="time-picker-box">
+                <div class="picker-label">SECONDS</div>
+                <div id="secondsPicker" class="time-picker"></div>
+            </div>
         </div>
+
         <!-- Calculate Button -->
         <button id="calculateBtn" class="calculate-button">Calculate</button>
+
         <!-- Result Display -->
         <div id="result"></div>
     </div>
-    <script src="script.js"></script> <!-- Se till att denna fil finns i samma katalog -->
+
+    <script src="matrix-effect.js"></script> <!-- För bakgrundseffekten -->
+    <script src="script.js"></script> <!-- Huvudfunktionaliteten -->
 </body>
 </html>

@@ -6,7 +6,12 @@ body {
     background-color: #000000;
     color: #FBCA61;
     text-align: center;
-    overflow-x: hidden;
+    overflow: hidden; /* Förhindrar scrollning */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Använder hela höjden på skärmen */
 }
 
 /* --- BACKGROUND EFFECT --- */
@@ -30,29 +35,26 @@ canvas {
 /* --- HEADER (Uppdelad i två rader) --- */
 header {
     text-align: center;
-    padding: 20px;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: bold;
     text-transform: uppercase;
-    line-height: 1.2;
+    line-height: 1.2; /* Ger mer luft mellan raderna */
 }
 
-header span {
-    display: block;
-}
-
-/* --- CALCULATOR CONTAINER (Med transparens) --- */
+/* --- CALCULATOR CONTAINER (Anpassad för mobil) --- */
 .calculator-container {
     background-color: rgba(26, 26, 26, 0.9); /* 10% transparens */
-    padding: 30px;
+    padding: 20px;
     border-radius: 15px;
     box-shadow: 0 0 15px #FBCA61;
-    max-width: 85%;
-    margin: 30px auto;
+    max-width: 90%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* --- LABEL ABOVE SELECTIONS (GENDER, AGE, DISTANCE) --- */
+/* --- RUBRIKER OVANFÖR VALEN --- */
 .picker-container label {
     font-size: 1rem;
     font-weight: lighter;
@@ -62,7 +64,7 @@ header span {
     letter-spacing: 1px;
 }
 
-/* --- GENDER, AGE, DISTANCE (Infinite Scroll + Klickbar) --- */
+/* --- PICKER STYLING (Åtgärdar klickproblem) --- */
 .picker {
     display: flex;
     justify-content: center;
@@ -71,9 +73,9 @@ header span {
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
-    width: 220px;
-    height: 45px;
-    overflow-x: scroll;
+    width: 200px;
+    height: 40px;
+    overflow-x: auto;
     scroll-snap-type: x mandatory;
     white-space: nowrap;
     user-select: none;
@@ -102,54 +104,18 @@ header span {
     opacity: 1;
 }
 
-/* --- AGE PICKER (Fixat att den inte är tom + jämn scroll) --- */
-.age-picker {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    background: #1a1a1a;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
-    padding: 10px 0;
-    width: 250px;
-    user-select: none;
-}
-
-.age-picker::-webkit-scrollbar {
-    display: none;
-}
-
-.age-picker .option {
-    padding: 10px;
-    font-size: 1.4rem;
-    cursor: pointer;
-    opacity: 0.5;
-}
-
-.age-picker .option.active {
-    background: #FBCA61;
-    color: #000;
-    font-weight: bold;
-    border-radius: 10px;
-    opacity: 1;
-}
-
 /* --- TIME PICKER (Fixad jämn scroll och klickbar) --- */
 .time-picker-container {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .time-picker {
     width: 60px;
     height: 80px;
-    overflow-y: scroll;
+    overflow-y: hidden; /* Förhindrar att dra ut siffrorna */
     scroll-snap-type: y mandatory;
     text-align: center;
     background: #1a1a1a;
@@ -157,27 +123,9 @@ header span {
     box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
     padding: 5px 0;
     user-select: none;
-    position: relative;
-}
-
-/* Highlight för att centrera aktivt val */
-.time-picker::before,
-.time-picker::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 30%;
-    background: rgba(0, 0, 0, 0.6);
-    pointer-events: none;
-    z-index: 2;
-}
-
-.time-picker::before {
-    top: 0;
-}
-
-.time-picker::after {
-    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .time-picker::-webkit-scrollbar {
@@ -185,7 +133,7 @@ header span {
 }
 
 .time-picker .option {
-    padding: 8px;
+    padding: 5px;
     font-size: 1.3rem;
     color: #FBCA61;
     scroll-snap-align: center;
@@ -213,7 +161,7 @@ header span {
     cursor: pointer;
     border-radius: 10px;
     transition: 0.3s;
-    margin-top: 20px;
+    margin-top: 10px;
     width: 90%;
     max-width: 300px;
 }

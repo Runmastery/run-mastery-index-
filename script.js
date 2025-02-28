@@ -2,83 +2,36 @@ document.addEventListener("DOMContentLoaded", function () {
     const calculateButton = document.getElementById("calculateBtn");
     const resultDiv = document.getElementById("result");
 
-    let selectedDistance = "10K"; // Default distance
+    let selectedDistance = "10K";
     let selectedGender = "Men";
-    let selectedAge = 25; // Default age
+    let selectedAge = 25;
 
-    /** --- Skapa rubriker över valen --- */
-    function createLabel(text, containerId) {
-        const container = document.getElementById(containerId);
-        const label = document.createElement("div");
-        label.classList.add("picker-label");
-        label.textContent = text;
-        container.parentElement.insertBefore(label, container);
-    }
-
-    createLabel("GENDER", "genderPicker");
-    createLabel("AGE", "agePicker");
-    createLabel("DISTANCE", "distancePicker");
-
-    /** --- Infinite Scroll för Gender, Age och Distance (Horisontell scroll) --- */
     function setupHorizontalScroll(containerId, optionsArray) {
         const container = document.getElementById(containerId);
         container.innerHTML = "";
-
-        // Skapa en loopande lista
-        optionsArray = [...optionsArray, ...optionsArray, ...optionsArray];
-
         optionsArray.forEach(optionText => {
             const option = document.createElement("div");
             option.classList.add("option");
             option.dataset.value = optionText;
             option.textContent = optionText;
+            option.addEventListener("click", function () {
+                document.querySelectorAll(`#${containerId} .option`).forEach(opt => opt.classList.remove("active"));
+                this.classList.add("active");
+                if (containerId === "genderPicker") selectedGender = this.dataset.value;
+                if (containerId === "distancePicker") selectedDistance = this.dataset.value;
+                if (containerId === "agePicker") selectedAge = this.dataset.value;
+            });
             container.appendChild(option);
-        });
-
-        container.scrollLeft = container.scrollWidth / 3; // Starta i mitten
-
-        let isScrolling;
-        container.addEventListener("scroll", function () {
-            clearTimeout(isScrolling);
-            isScrolling = setTimeout(() => {
-                let options = container.querySelectorAll(".option");
-                let scrollLeft = container.scrollLeft;
-                let optionWidth = options[0].offsetWidth;
-                let centerIndex = Math.round(scrollLeft / optionWidth);
-
-                let newScrollLeft = centerIndex * optionWidth;
-
-                options.forEach((option, index) => {
-                    option.classList.remove("active");
-                    if (index === centerIndex) {
-                        option.classList.add("active");
-                        if (containerId === "genderPicker") selectedGender = option.dataset.value;
-                        if (containerId === "distancePicker") selectedDistance = option.dataset.value;
-                        if (containerId === "agePicker") selectedAge = option.dataset.value;
-                    }
-                });
-
-                setTimeout(() => {
-                    container.scrollTo({
-                        left: newScrollLeft,
-                        behavior: "smooth"
-                    });
-                });
-            }, 200);
         });
     }
 
     setupHorizontalScroll("genderPicker", ["Men", "Women"]);
     setupHorizontalScroll("distancePicker", ["5K", "10K", "Half Marathon", "Marathon"]);
+    setupHorizontalScroll("agePicker", Array.from({ length: 71 }, (_, i) => (i + 15).toString()));
 
-    const ageArray = Array.from({ length: 71 }, (_, i) => (i + 15).toString());
-    setupHorizontalScroll("agePicker", ageArray);
-
-    /** --- Vertikal scroll för Tidspickern (iOS-liknande hjul) --- */
     function setupTimePicker(pickerId, min, max) {
         const picker = document.getElementById(pickerId);
         picker.innerHTML = "";
-
         for (let i = min; i <= max; i++) {
             const option = document.createElement("div");
             option.classList.add("option");
@@ -86,41 +39,13 @@ document.addEventListener("DOMContentLoaded", function () {
             option.textContent = i;
             picker.appendChild(option);
         }
-
-        let isScrolling;
-        picker.addEventListener("scroll", function () {
-            clearTimeout(isScrolling);
-            isScrolling = setTimeout(() => {
-                let options = picker.querySelectorAll(".option");
-                let scrollTop = picker.scrollTop;
-                let optionHeight = options[0].offsetHeight;
-                let centerIndex = Math.round(scrollTop / optionHeight);
-
-                options.forEach((option, index) => {
-                    option.classList.remove("active");
-                    if (index === centerIndex) {
-                        option.classList.add("active");
-                    }
-                });
-
-                requestAnimationFrame(() => {
-                    picker.scrollTo({
-                        top: centerIndex * optionHeight,
-                        behavior: "smooth"
-                    });
-                });
-            }, 200);
-        });
     }
 
     setupTimePicker("hoursPicker", 0, 23);
     setupTimePicker("minutesPicker", 0, 59);
     setupTimePicker("secondsPicker", 0, 59);
 
-    /** --- Beräkna-knappen --- */
     calculateButton.addEventListener("click", function () {
-        console.log("Calculate button clicked!");
-
         const hours = parseInt(document.querySelector("#hoursPicker .option.active")?.dataset.value) || 0;
         const minutes = parseInt(document.querySelector("#minutesPicker .option.active")?.dataset.value) || 0;
         const seconds = parseInt(document.querySelector("#secondsPicker .option.active")?.dataset.value) || 0;
@@ -131,18 +56,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
-        console.log("Total time in seconds:", totalSeconds);
-
         const selectedAgeGroup = getAgeGroup(selectedGender, selectedAge);
-        console.log("Selected Age Group:", selectedAgeGroup);
-
         const index = calculateRunMasteryIndex(selectedGender, selectedAgeGroup, selectedDistance, totalSeconds);
-        console.log("Calculated Index:", index);
 
         resultDiv.innerHTML = `<p>Your Run Mastery Index: <strong>${index}</strong></p>`;
     });
 
-    /** --- Funktion för att bestämma åldersgrupp baserat på ålder --- */
     function getAgeGroup(gender, age) {
         if (age < 35) return gender === "Men" ? "M1-34" : "W1-34";
         if (age < 40) return gender === "Men" ? "M35" : "W35";
@@ -156,5 +75,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (age < 80) return gender === "Men" ? "M75" : "W75";
         if (age < 85) return gender === "Men" ? "M80" : "W80";
         return gender === "Men" ? "M85" : "W85";
+    }
+
+    function calculateRunMasteryIndex(gender, ageGroup, distance, totalSeconds) {
+        return Math.floor(Math.random() * 100); // Placeholder för riktig beräkning
     }
 });

@@ -1,57 +1,49 @@
-@@ -15,64 +15,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Mastery Index</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Background Effect -->
+    <div class="matrix-background">
+        <canvas id="matrixCanvas"></canvas>
     </div>
 
     <!-- Page Header -->
-    <header>Run Mastery Index</header>
-    <header>Calculate Your Run Mastery Index</header>
+    <header>
+        <span>CALCULATE YOUR</span>
+        <span>RUN MASTERY INDEX</span>
+    </header>
 
     <!-- Calculator Container -->
     <div class="calculator-container">
-        <h2>Calculate Your Performance</h2>
         
         <!-- Gender Selection -->
         <div class="picker-container">
-            <label for="genderPicker">Select Gender</label>
+            <label class="picker-label" for="genderPicker">GENDER</label>
             <div class="picker" id="genderPicker">
                 <div class="option" data-value="Men">Men</div>
                 <div class="option active" data-value="Women">Women</div>
-                <div class="option active" data-value="Men">Men</div>
-                <div class="option" data-value="Women">Women</div>
+                <div class="option" data-value="Men">Men</div>
             </div>
         </div>
 
-        <!-- Age Selection (Horizontal Layout) -->
         <!-- Age Selection -->
         <div class="picker-container">
-            <label for="agePicker">Select Age</label>
-            <div class="picker" id="agePicker">
-                <div class="option" data-value="15">15</div>
-                <div class="option" data-value="20">20</div>
-                <div class="option" data-value="25">25</div>
-                <div class="option active" data-value="30">30</div>
-                <div class="option" data-value="35">35</div>
-                <div class="option" data-value="40">40</div>
-                <div class="option" data-value="45">45</div>
-                <div class="option" data-value="50">50</div>
-                <div class="option" data-value="55">55</div>
-                <div class="option" data-value="60">60</div>
-                <div class="option" data-value="65">65</div>
-                <div class="option" data-value="70">70</div>
-                <div class="option" data-value="75">75</div>
-                <div class="option" data-value="80">80</div>
-                <div class="option" data-value="85">85</div>
-            </div>
+            <label class="picker-label" for="agePicker">AGE</label>
             <div class="picker" id="agePicker"></div>
         </div>
 
         <!-- Distance Selection -->
         <div class="picker-container">
-            <label for="distancePicker">Select Distance</label>
+            <label class="picker-label" for="distancePicker">DISTANCE</label>
             <div class="picker" id="distancePicker">
-                <div class="option" data-value="5000m">5K</div>
-                <div class="option active" data-value="10000m">10K</div>
-                <div class="option active" data-value="5000m">5K</div>
-                <div class="option" data-value="10000m">10K</div>
+                <div class="option" data-value="5K">5K</div>
+                <div class="option active" data-value="10K">10K</div>
                 <div class="option" data-value="Half Marathon">Half Marathon</div>
                 <div class="option" data-value="Marathon">Marathon</div>
             </div>
@@ -60,9 +52,6 @@
         <!-- Time Selection -->
         <h3>Enter Your Time</h3>
         <div class="time-picker-container">
-            <div class="time-picker" id="hoursPicker"></div>
-            <div class="time-picker" id="minutesPicker"></div>
-            <div class="time-picker" id="secondsPicker"></div>
             <div>
                 <label>H</label>
                 <div class="time-picker" id="hoursPicker"></div>
@@ -78,8 +67,13 @@
         </div>
 
         <!-- Calculate Button -->
-        <button id="calculateBtn" class="calculate-button">Get Result</button>
         <button id="calculateBtn" class="calculate-button">Generate Run Mastery Index</button>
 
         <!-- Result Display -->
         <div id="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

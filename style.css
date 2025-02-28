@@ -70,6 +70,53 @@ header {
     color: #000;
 }
 
+/* --- PICKER STYLING --- */
+.picker-container {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.picker-container label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #FBCA61;
+}
+
+.picker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1a1a1a;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
+    width: 250px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    white-space: nowrap;
+}
+
+.option {
+    font-size: 1.5rem;
+    color: #FBCA61;
+    padding: 10px 20px;
+    cursor: pointer;
+    scroll-snap-align: center;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.option.active {
+    color: #000;
+    background-color: #FBCA61;
+    border-radius: 10px;
+    font-weight: bold;
+    transform: scale(1.1);
+}
+
+.picker::-webkit-scrollbar {
+    display: none;
+}
+
 /* --- AGE SELECTOR --- */
 .age-selector {
     display: flex;
@@ -132,11 +179,11 @@ input[type="range"] {
 .calculate-button:hover {
     background: #e0b04f;
 }
+
 /* --- ACTIVE BUTTON STATE (FIX) --- */
 .button-group button.active {
-    background: #FBCA61; /* Gul bakgrund */
-    color: #1a1a1a; /* Mörk text så att det syns */
+    background: #FBCA61;
+    color: #1a1a1a;
     font-weight: bold;
     border: 2px solid #FBCA61;
 }
-

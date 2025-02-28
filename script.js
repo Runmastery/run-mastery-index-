@@ -123,4 +123,32 @@ document.addEventListener("DOMContentLoaded", function () {
         if (age < 85) return gender === "Men" ? "M80" : "W80";
         return gender === "Men" ? "M85" : "W85";
     }
+document.addEventListener("DOMContentLoaded", function() {
+    const timePickers = document.querySelectorAll(".time-picker");
+
+    timePickers.forEach(picker => {
+        picker.addEventListener("scroll", function() {
+            let options = picker.querySelectorAll(".option");
+            let scrollTop = picker.scrollTop;
+            let optionHeight = options[0].offsetHeight;
+            let centerIndex = Math.round(scrollTop / optionHeight);
+
+            options.forEach((option, index) => {
+                option.classList.remove("active");
+                if (index === centerIndex) {
+                    option.classList.add("active");
+                }
+            });
+
+            // Snäpp tillbaka till exakt rätt position
+            setTimeout(() => {
+                picker.scrollTo({
+                    top: centerIndex * optionHeight,
+                    behavior: "smooth"
+                });
+            }, 100);
+        });
+    });
+});
+
 });

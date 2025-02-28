@@ -52,28 +52,13 @@ header {
     margin-bottom: 20px;
 }
 
-/* --- BUTTONS --- */
-.button-group button {
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    border: 2px solid #FBCA61;
-    background: transparent;
-    color: #FBCA61;
-    cursor: pointer;
-    margin: 5px;
-    transition: 0.3s;
-    border-radius: 5px;
-}
-
-.button-group button:hover {
-    background: #FBCA61;
-    color: #000;
-}
-
 /* --- PICKER STYLING --- */
 .picker-container {
     margin: 20px auto;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .picker-container label {
@@ -117,50 +102,62 @@ header {
     display: none;
 }
 
-/* --- AGE SELECTOR --- */
-.age-selector {
+/* --- AGE PICKER (VERTICAL) --- */
+.age-picker {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin: 20px 0;
+    height: 120px;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    width: 100px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
 }
 
-#age-value {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-right: 15px;
+.age-picker .option {
+    scroll-snap-align: center;
+    padding: 10px;
 }
 
-input[type="range"] {
-    width: 60%;
-    appearance: none;
-    background: #FBCA61;
-    height: 8px;
-    border-radius: 5px;
-}
-
-/* --- TIME INPUTS --- */
-.time-inputs {
+/* --- TIME PICKER (VERTICAL) --- */
+.time-picker-container {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 20px;
     margin-top: 20px;
 }
 
-.time-inputs input {
-    width: 80px;
-    padding: 10px;
+.time-picker {
+    width: 60px;
+    height: 120px;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
     text-align: center;
-    font-size: 1.2rem;
-    background: #000;
-    color: #FBCA61;
-    border: 2px solid #FBCA61;
-    border-radius: 5px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
 }
 
-.time-inputs input::placeholder {
+.time-picker .option {
+    padding: 10px;
+    font-size: 1.5rem;
     color: #FBCA61;
+    scroll-snap-align: center;
+    cursor: pointer;
+}
+
+.time-picker .option.active {
+    color: #000;
+    background-color: #FBCA61;
+    border-radius: 10px;
     font-weight: bold;
+    transform: scale(1.1);
+}
+
+.time-picker::-webkit-scrollbar {
+    display: none;
 }
 
 /* --- CALCULATE BUTTON --- */
@@ -178,12 +175,4 @@ input[type="range"] {
 
 .calculate-button:hover {
     background: #e0b04f;
-}
-
-/* --- ACTIVE BUTTON STATE (FIX) --- */
-.button-group button.active {
-    background: #FBCA61;
-    color: #1a1a1a;
-    font-weight: bold;
-    border: 2px solid #FBCA61;
 }

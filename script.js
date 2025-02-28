@@ -6,13 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let selectedGender = "Men";
     let selectedAge = 25; // Default age
 
-    /** --- Infinite Scroll för Gender, Age och Distance --- */
-    function setupHorizontalScroll(containerId, optionsArray) {
+    /** --- Enkel, horisontell scroll för Gender, Age och Distance --- */
+    function setupSimpleScroll(containerId, optionsArray) {
         const container = document.getElementById(containerId);
         container.innerHTML = "";
-
-        // Loopa listan tre gånger för en sömlös infinite scroll
-        optionsArray = [...optionsArray, ...optionsArray, ...optionsArray];
 
         optionsArray.forEach(optionText => {
             const option = document.createElement("div");
@@ -21,9 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
             option.textContent = optionText;
             container.appendChild(option);
         });
-
-        // Centrerar scrollningen i mitten
-        container.scrollLeft = container.scrollWidth / 3;
 
         container.addEventListener("scroll", function () {
             let options = container.querySelectorAll(".option");
@@ -51,14 +45,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    setupHorizontalScroll("genderPicker", ["Men", "Women"]);
-    setupHorizontalScroll("distancePicker", ["5K", "10K", "Half Marathon", "Marathon"]);
-    
+    setupSimpleScroll("genderPicker", ["Men", "Women"]);
+    setupSimpleScroll("distancePicker", ["5K", "10K", "Half Marathon", "Marathon"]);
+
     // Generera ålder korrekt
     const ageArray = Array.from({ length: 71 }, (_, i) => (i + 15).toString());
-    setupHorizontalScroll("agePicker", ageArray);
+    setupSimpleScroll("agePicker", ageArray);
 
-    /** --- Vertikal scroll för Tidspickern (iOS-hjul) --- */
+    /** --- Lodrät scroll för Tidspickern (iOS-hjul) --- */
     function setupTimePicker(pickerId, min, max) {
         const picker = document.getElementById(pickerId);
         picker.innerHTML = "";

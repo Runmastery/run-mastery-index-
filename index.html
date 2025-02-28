@@ -1,87 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Run Mastery Index</title>
-    <meta name="description" content="Calculate your Run Mastery Index with this interactive tool.">
-    <meta name="keywords" content="Run Mastery, running index, performance tracker, running calculator">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Background Effect -->
-    <div class="matrix-background">
-        <canvas id="matrixCanvas"></canvas>
-    </div>
+/* --- GENERAL STYLING --- */
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    color: #FBCA61;
+    text-align: center;
+}
 
-    <!-- Page Header -->
-    <header>Run Mastery Index</header>
+/* --- BACKGROUND EFFECT --- */
+.matrix-background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    overflow: hidden;
+    z-index: -1;
+}
 
-    <!-- Calculator Container -->
-    <div class="calculator-container">
-        <h2>Calculate Your Performance</h2>
-        
-        <!-- Gender Selection -->
-        <div class="picker-container">
-            <label for="genderPicker">Select Gender</label>
-            <div class="picker" id="genderPicker">
-                <div class="option" data-value="Men">Men</div>
-                <div class="option active" data-value="Women">Women</div>
-            </div>
-        </div>
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
-        <!-- Age Selection (Back to horizontal format) -->
-        <div class="picker-container">
-            <label for="agePicker">Select Age</label>
-            <div class="picker" id="agePicker">
-                <div class="option" data-value="15">15</div>
-                <div class="option" data-value="20">20</div>
-                <div class="option" data-value="25">25</div>
-                <div class="option active" data-value="30">30</div>
-                <div class="option" data-value="35">35</div>
-                <div class="option" data-value="40">40</div>
-                <div class="option" data-value="45">45</div>
-                <div class="option" data-value="50">50</div>
-                <div class="option" data-value="55">55</div>
-                <div class="option" data-value="60">60</div>
-                <div class="option" data-value="65">65</div>
-                <div class="option" data-value="70">70</div>
-                <div class="option" data-value="75">75</div>
-                <div class="option" data-value="80">80</div>
-                <div class="option" data-value="85">85</div>
-            </div>
-        </div>
+/* --- HEADER --- */
+header {
+    text-align: center;
+    padding: 30px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
 
-        <!-- Distance Selection -->
-        <div class="picker-container">
-            <label for="distancePicker">Select Distance</label>
-            <div class="picker" id="distancePicker">
-                <div class="option" data-value="5000m">5K</div>
-                <div class="option active" data-value="10000m">10K</div>
-                <div class="option" data-value="Half Marathon">Half Marathon</div>
-                <div class="option" data-value="Marathon">Marathon</div>
-            </div>
-        </div>
+/* --- CALCULATOR CONTAINER --- */
+.calculator-container {
+    background-color: #1a1a1a;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #FBCA61;
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+}
 
-        <!-- Time Selection -->
-        <h3>Enter Your Time</h3>
-        <div class="time-picker-container">
-            <div class="time-picker" id="hoursPicker"></div>
-            <div class="time-picker" id="minutesPicker"></div>
-            <div class="time-picker" id="secondsPicker"></div>
-        </div>
+/* --- HEADINGS INSIDE THE CALCULATOR --- */
+.calculator-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
 
-        <!-- Calculate Button (Restored to original style) -->
-        <button id="calculateBtn" class="calculate-button">Get Result</button>
-        
-        <!-- Result Display -->
-        <div id="result"></div>
-    </div>
+/* --- PICKER STYLING --- */
+.picker-container {
+    margin: 20px auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    <!-- JavaScript -->
-    <script src="matrix.js"></script>
-    <script src="records.js"></script>
-    <script src="calculator.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+.picker-container label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #FBCA61;
+}
+
+.picker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1a1a1a;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
+    width: 250px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    white-space: nowrap;
+}
+
+.option {
+    font-size: 1.5rem;
+    color: #FBCA61;
+    padding: 10px 20px;
+    cursor: pointer;
+    scroll-snap-align: center;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.option.active {
+    color: #000;
+    background-color: #FBCA61;
+    border-radius: 10px;
+    font-weight: bold;
+    transform: scale(1.1);
+}
+
+.picker::-webkit-scrollbar {
+    display: none;
+}
+
+/* --- TIME PICKER (VERTICAL, SINGLE DIGIT VISIBLE) --- */
+.time-picker-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.time-picker {
+    width: 60px;
+    height: 50px; /* Ensuring only one digit is visible */
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    text-align: center;
+    background: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
+    padding: 5px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time-picker .option {
+    padding: 5px;
+    font-size: 1.5rem;
+    color: #FBCA61;
+    scroll-snap-align: center;
+    cursor: pointer;
+}
+
+.time-picker .option.active {
+    color: #000;
+    background-color: #FBCA61;
+    border-radius: 10px;
+    font-weight: bold;
+    transform: scale(1.1);
+}
+
+.time-picker::-webkit-scrollbar {
+    display: none;
+}

@@ -6,12 +6,12 @@ body {
     background-color: #000000;
     color: #FBCA61;
     text-align: center;
-    overflow: hidden; /* Förhindrar scrollning */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Använder hela höjden på skärmen */
+    height: 100vh;
 }
 
 /* --- BACKGROUND EFFECT --- */
@@ -39,12 +39,12 @@ header {
     font-weight: bold;
     text-transform: uppercase;
     line-height: 1.2;
-    margin-bottom: 10px; /* Ger mer luft mellan rubriken och kalkylatorn */
+    margin-bottom: 15px;
 }
 
 /* --- CALCULATOR CONTAINER (Anpassad för mobil) --- */
 .calculator-container {
-    background-color: rgba(26, 26, 26, 0.9); /* 10% transparens */
+    background-color: rgba(26, 26, 26, 0.9);
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 0 15px #FBCA61;
@@ -58,14 +58,12 @@ header {
 /* --- RUBRIKER OVANFÖR VALEN --- */
 .picker-label {
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: lighter;
     color: #FBCA61;
     text-transform: uppercase;
     margin-bottom: 5px;
-    display: block;
 }
 
-/* --- HORIZONTAL PICKERS (Gender, Age, Distance) --- */
 .picker {
     display: flex;
     justify-content: center;
@@ -76,30 +74,22 @@ header {
     box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
     width: 220px;
     height: 45px;
-    overflow-x: scroll;
+    overflow-x: auto;
     scroll-snap-type: x mandatory;
     white-space: nowrap;
     user-select: none;
 }
 
-.picker::-webkit-scrollbar {
-    display: none;
-}
-
-.option {
+.picker .option {
     font-size: 1.3rem;
     color: #FBCA61;
     padding: 8px 15px;
     cursor: pointer;
     scroll-snap-align: center;
     opacity: 0.5;
-    user-select: none;
-    display: inline-block;
-    width: 80px;
-    text-align: center;
 }
 
-.option.active {
+.picker .option.active {
     color: #000;
     background-color: #FBCA61;
     border-radius: 10px;
@@ -108,7 +98,7 @@ header {
     opacity: 1;
 }
 
-/* --- TIME PICKER (Vertikal scroll) --- */
+/* --- TIME PICKER (Fixad jämn scroll och klickbar) --- */
 .time-picker-container {
     display: flex;
     justify-content: center;
@@ -119,7 +109,7 @@ header {
 .time-picker {
     width: 60px;
     height: 80px;
-    overflow-y: hidden; /* Förhindrar att dra ut siffrorna */
+    overflow-y: hidden;
     scroll-snap-type: y mandatory;
     text-align: center;
     background: #1a1a1a;
@@ -127,13 +117,6 @@ header {
     box-shadow: 0 0 15px rgba(251, 202, 97, 0.7);
     padding: 5px 0;
     user-select: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.time-picker::-webkit-scrollbar {
-    display: none;
 }
 
 .time-picker .option {
@@ -143,7 +126,6 @@ header {
     scroll-snap-align: center;
     cursor: pointer;
     opacity: 0.5;
-    user-select: none;
 }
 
 .time-picker .option.active {
@@ -155,7 +137,7 @@ header {
     opacity: 1;
 }
 
-/* --- CALCULATE BUTTON (Luftigare & snyggare) --- */
+/* --- CALCULATE BUTTON --- */
 .calculate-button {
     padding: 15px 20px;
     font-size: 1.2rem;

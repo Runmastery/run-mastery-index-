@@ -1,5 +1,3 @@
-@@ -1,128 +1,115 @@
-@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     const calculateButton = document.getElementById("calculateBtn");
     const resultDiv = document.getElementById("result");
@@ -8,11 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let selectedGender = "Men";
     let selectedAge = 25; // Default age
 
-    /** --- Återställ rubrikerna över valen --- */
+    /** --- Skapa rubriker över valen --- */
     function createLabel(text, containerId) {
         const container = document.getElementById(containerId);
         const label = document.createElement("div");
-@@ -19,13 +18,12 @@ document.addEventListener("DOMContentLoaded", function () {
         label.classList.add("picker-label");
         label.textContent = text;
         container.parentElement.insertBefore(label, container);
@@ -22,31 +19,27 @@ document.addEventListener("DOMContentLoaded", function () {
     createLabel("AGE", "agePicker");
     createLabel("DISTANCE", "distancePicker");
 
-    /** --- Infinite Scroll för Gender, Age och Distance --- */
+    /** --- Infinite Scroll för Gender, Age och Distance (Horisontell scroll) --- */
     function setupHorizontalScroll(containerId, optionsArray) {
         const container = document.getElementById(containerId);
         container.innerHTML = "";
 
-
+        // Skapa en loopande lista
         optionsArray = [...optionsArray, ...optionsArray, ...optionsArray];
-
 
         optionsArray.forEach(optionText => {
             const option = document.createElement("div");
             option.classList.add("option");
-@@ -35,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
             option.dataset.value = optionText;
             option.textContent = optionText;
             container.appendChild(option);
         });
 
-        container.scrollLeft = container.scrollWidth / 3;
-
+        container.scrollLeft = container.scrollWidth / 3; // Starta i mitten
 
         let isScrolling;
         container.addEventListener("scroll", function () {
             clearTimeout(isScrolling);
-@@ -61,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
             isScrolling = setTimeout(() => {
                 let options = container.querySelectorAll(".option");
                 let scrollLeft = container.scrollLeft;
@@ -71,41 +64,21 @@ document.addEventListener("DOMContentLoaded", function () {
                         behavior: "smooth"
                     });
                 });
-            }, 50);
-            }, 150); // Längre timeout för mjukare skroll
-                }, 50);
             }, 200);
         });
     }
 
-@@ -71,7 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
     setupHorizontalScroll("genderPicker", ["Men", "Women"]);
     setupHorizontalScroll("distancePicker", ["5K", "10K", "Half Marathon", "Marathon"]);
-    
+
     const ageArray = Array.from({ length: 71 }, (_, i) => (i + 15).toString());
     setupHorizontalScroll("agePicker", ageArray);
 
-    /** --- Vertikal scroll för Tidspickern (iOS-hjul) --- */
+    /** --- Vertikal scroll för Tidspickern (iOS-liknande hjul) --- */
     function setupTimePicker(pickerId, min, max) {
         const picker = document.getElementById(pickerId);
         picker.innerHTML = "";
-@@ -106,76 +103,11 @@ document.addEventListener("DOMContentLoaded", function () {
-                        behavior: "smooth"
-                    });
-                });
-            }, 50);
-        });
 
-        let startY, scrollStart;
-        picker.addEventListener("touchstart", function (e) {
-            startY = e.touches[0].clientY;
-            scrollStart = picker.scrollTop;
-        });
-
-        picker.addEventListener("touchmove", function (e) {
-            let deltaY = e.touches[0].clientY - startY;
-            picker.scrollTop = scrollStart - deltaY;
-        });
         for (let i = min; i <= max; i++) {
             const option = document.createElement("div");
             option.classList.add("option");
@@ -114,10 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
             picker.appendChild(option);
         }
 
-        picker.addEventListener("touchend", function () {
-            let options = picker.querySelectorAll(".option");
-            let optionHeight = options[0].offsetHeight;
-            let centerIndex = Math.round(picker.scrollTop / optionHeight);
         let isScrolling;
         picker.addEventListener("scroll", function () {
             clearTimeout(isScrolling);
@@ -134,17 +103,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
 
-            requestAnimationFrame(() => {
-                picker.scrollTo({
-                    top: centerIndex * optionHeight,
-                    behavior: "smooth"
                 requestAnimationFrame(() => {
                     picker.scrollTo({
                         top: centerIndex * optionHeight,
                         behavior: "smooth"
                     });
                 });
-            });
             }, 200);
         });
     }

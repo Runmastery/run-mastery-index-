@@ -6,10 +6,25 @@ document.addEventListener("DOMContentLoaded", function () {
     let selectedGender = "Men";
     let selectedAge = 25; // Default age
 
-    /** --- Enkel, horisontell scroll för Gender, Age och Distance --- */
-    function setupSimpleScroll(containerId, optionsArray) {
+    /** --- Återställ rubrikerna över valen --- */
+    function createLabel(text, containerId) {
+        const container = document.getElementById(containerId);
+        const label = document.createElement("div");
+        label.classList.add("picker-label");
+        label.textContent = text;
+        container.parentElement.insertBefore(label, container);
+    }
+
+    createLabel("GENDER", "genderPicker");
+    createLabel("AGE", "agePicker");
+    createLabel("DISTANCE", "distancePicker");
+
+    /** --- Infinite Scroll för Gender, Age och Distance --- */
+    function setupHorizontalScroll(containerId, optionsArray) {
         const container = document.getElementById(containerId);
         container.innerHTML = "";
+
+        optionsArray = [...optionsArray, ...optionsArray, ...optionsArray];
 
         optionsArray.forEach(optionText => {
             const option = document.createElement("div");
@@ -18,6 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
             option.textContent = optionText;
             container.appendChild(option);
         });
+
+        container.scrollLeft = container.scrollWidth / 3;
 
         container.addEventListener("scroll", function () {
             let options = container.querySelectorAll(".option");
@@ -35,7 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
 
-            // Snäpp tillbaka till exakt rätt position
             setTimeout(() => {
                 container.scrollTo({
                     left: centerIndex * optionWidth,
@@ -45,14 +61,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    setupSimpleScroll("genderPicker", ["Men", "Women"]);
-    setupSimpleScroll("distancePicker", ["5K", "10K", "Half Marathon", "Marathon"]);
-
-    // Generera ålder korrekt
+    setupHorizontalScroll("genderPicker", ["Men", "Women"]);
+    setupHorizontalScroll("distancePicker", ["5K", "10K", "Half Marathon", "Marathon"]);
+    
     const ageArray = Array.from({ length: 71 }, (_, i) => (i + 15).toString());
-    setupSimpleScroll("agePicker", ageArray);
+    setupHorizontalScroll("agePicker", ageArray);
 
-    /** --- Lodrät scroll för Tidspickern (iOS-hjul) --- */
+    /** --- Vertikal scroll för Tidspickern (iOS-hjul) --- */
     function setupTimePicker(pickerId, min, max) {
         const picker = document.getElementById(pickerId);
         picker.innerHTML = "";
@@ -78,7 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
 
-            // Snäpp tillbaka till exakt rätt position
             setTimeout(() => {
                 picker.scrollTo({
                     top: centerIndex * optionHeight,
@@ -87,7 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 100);
         });
 
-        // Förhindra att man kan dra utanför hjulet
         picker.addEventListener("mousedown", function (event) {
             event.preventDefault();
         });

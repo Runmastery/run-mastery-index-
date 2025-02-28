@@ -1,51 +1,69 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
     const calculateButton = document.getElementById("calculateBtn");
     const resultDiv = document.getElementById("result");
 
-    let selectedDistance = "10K";
+    let selectedDistance = "10000m"; // Default distance
     let selectedGender = "Men";
-    let selectedAge = 25;
+    let selectedAge = 25; // Default age
 
-    function setupHorizontalScroll(containerId, optionsArray) {
-        const container = document.getElementById(containerId);
-        container.innerHTML = "";
-        optionsArray.forEach(optionText => {
-            const option = document.createElement("div");
-            option.classList.add("option");
-            option.dataset.value = optionText;
-            option.textContent = optionText;
-            option.addEventListener("click", function () {
-                document.querySelectorAll(`#${containerId} .option`).forEach(opt => opt.classList.remove("active"));
-                this.classList.add("active");
-                if (containerId === "genderPicker") selectedGender = this.dataset.value;
-                if (containerId === "distancePicker") selectedDistance = this.dataset.value;
-                if (containerId === "agePicker") selectedAge = this.dataset.value;
-            });
-            container.appendChild(option);
+    // Hantera val av kön
+    document.querySelectorAll("#genderPicker .option").forEach(option => {
+        option.addEventListener("click", function() {
+            document.querySelectorAll("#genderPicker .option").forEach(opt => opt.classList.remove("active"));
+            this.classList.add("active");
+            selectedGender = this.dataset.value;
+            console.log("Selected Gender:", selectedGender);
         });
+    });
+
+    // Hantera val av ålder
+    const agePicker = document.getElementById("agePicker");
+    if (agePicker) {
+        for (let i = 15; i <= 85; i++) {
+        for (let i = 15; i <= 85; i += 5) {
+            const ageOption = document.createElement("div");
+            ageOption.classList.add("option");
+            ageOption.dataset.value = i;
+@@ -44,49 +44,69 @@
+        });
+    });
+
+    // Hantera val av tid (scroll-pickers)
+    function getTimeFromPicker(pickerId) {
+        return parseInt(document.querySelector(`#${pickerId} .option.active`)?.dataset.value) || 0;
     }
+    // Dynamiskt generera tid för timmar, minuter och sekunder
+    const timePickers = {
+        hoursPicker: { id: "hoursPicker", min: 0, max: 23 },
+        minutesPicker: { id: "minutesPicker", min: 0, max: 59 },
+        secondsPicker: { id: "secondsPicker", min: 0, max: 59 }
+    };
 
-    setupHorizontalScroll("genderPicker", ["Men", "Women"]);
-    setupHorizontalScroll("distancePicker", ["5K", "10K", "Half Marathon", "Marathon"]);
-    setupHorizontalScroll("agePicker", Array.from({ length: 71 }, (_, i) => (i + 15).toString()));
-
-    function setupTimePicker(pickerId, min, max) {
-        const picker = document.getElementById(pickerId);
-        picker.innerHTML = "";
-        for (let i = min; i <= max; i++) {
-            const option = document.createElement("div");
-            option.classList.add("option");
-            option.dataset.value = i;
-            option.textContent = i;
-            picker.appendChild(option);
+    Object.values(timePickers).forEach(picker => {
+        const pickerElement = document.getElementById(picker.id);
+        if (pickerElement) {
+            for (let i = picker.min; i <= picker.max; i++) {
+                const option = document.createElement("div");
+                option.classList.add("option");
+                option.dataset.value = i;
+                option.textContent = i;
+                option.addEventListener("click", function() {
+                    document.querySelectorAll(`#${picker.id} .option`).forEach(opt => opt.classList.remove("active"));
+                    this.classList.add("active");
+                    console.log(`Selected ${picker.id}:`, this.dataset.value);
+                });
+                pickerElement.appendChild(option);
+            }
         }
-    }
+    });
 
-    setupTimePicker("hoursPicker", 0, 23);
-    setupTimePicker("minutesPicker", 0, 59);
-    setupTimePicker("secondsPicker", 0, 59);
+    // Beräkna-knappen
+    calculateButton.addEventListener("click", function() {
+        console.log("Calculate button clicked!"); // Debug-logg
 
-    calculateButton.addEventListener("click", function () {
+        const hours = getTimeFromPicker("hoursPicker");
+        const minutes = getTimeFromPicker("minutesPicker");
+        const seconds = getTimeFromPicker("secondsPicker");
         const hours = parseInt(document.querySelector("#hoursPicker .option.active")?.dataset.value) || 0;
         const minutes = parseInt(document.querySelector("#minutesPicker .option.active")?.dataset.value) || 0;
         const seconds = parseInt(document.querySelector("#secondsPicker .option.active")?.dataset.value) || 0;
@@ -56,12 +74,18 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+        console.log("Total time in seconds:", totalSeconds);
+
         const selectedAgeGroup = getAgeGroup(selectedGender, selectedAge);
+        console.log("Selected Age Group:", selectedAgeGroup);
+
         const index = calculateRunMasteryIndex(selectedGender, selectedAgeGroup, selectedDistance, totalSeconds);
+        console.log("Calculated Index:", index);
 
         resultDiv.innerHTML = `<p>Your Run Mastery Index: <strong>${index}</strong></p>`;
     });
 
+    // Funktion för att bestämma åldersgrupp baserat på ålder
     function getAgeGroup(gender, age) {
         if (age < 35) return gender === "Men" ? "M1-34" : "W1-34";
         if (age < 40) return gender === "Men" ? "M35" : "W35";
@@ -74,10 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (age < 75) return gender === "Men" ? "M70" : "W70";
         if (age < 80) return gender === "Men" ? "M75" : "W75";
         if (age < 85) return gender === "Men" ? "M80" : "W80";
-        return gender === "Men" ? "M85" : "W85";
-    }
-
-    function calculateRunMasteryIndex(gender, ageGroup, distance, totalSeconds) {
-        return Math.floor(Math.random() * 100); // Placeholder för riktig beräkning
+        return gender === "Men" ? "M85" : "W85"; // Default för 85+
     }
 });

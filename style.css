@@ -21,17 +21,17 @@ body {
     background: #000000;
     overflow: hidden;
     z-index: -1;
-    padding: 40px; /* Ökad padding för mer Matrix-effekt */
+    padding: 45px; /* Ökad padding för mer Matrix-effekt */
 }
 
-/* --- CALCULATOR CONTAINER (Mindre höjd) --- */
+/* --- CALCULATOR CONTAINER (Mindre höjd & innehåll anpassat) --- */
 .calculator-container {
     background-color: rgba(26, 26, 26, 0.9);
-    padding: 15px;
+    padding: 12px;
     border-radius: 15px;
     box-shadow: 0 0 15px #FBCA61;
-    max-width: 65%; /* Smalare */
-    height: 60vh; /* Kortare höjd för att rymma allt */
+    max-width: 60%; /* Smalare */
+    height: 55vh; /* Mindre höjd så att allt får plats */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -39,7 +39,7 @@ body {
 
 /* --- HEADER INSIDE CONTAINER --- */
 .calculator-container h1 {
-    font-size: 1.6rem;
+    font-size: 1.4rem; /* Mindre rubrik */
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 5px;
@@ -50,7 +50,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 /* --- PICKERS (GENDER, DISTANCE) --- */
@@ -59,11 +59,11 @@ body {
     justify-content: center;
     align-items: center;
     background: #1a1a1a;
-    padding: 8px;
+    padding: 6px;
     border-radius: 10px;
-    box-shadow: 0 0 12px rgba(251, 202, 97, 0.7);
-    width: 180px;
-    height: 40px;
+    box-shadow: 0 0 10px rgba(251, 202, 97, 0.7);
+    width: 160px; /* Förminskad */
+    height: 35px; /* Förminskad */
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     white-space: nowrap;
@@ -74,9 +74,9 @@ body {
 }
 
 .option {
-    font-size: 1.1rem;
+    font-size: 1rem; /* Mindre text */
     color: #FBCA61;
-    padding: 4px 8px;
+    padding: 4px 6px;
     cursor: pointer;
     scroll-snap-align: center;
     opacity: 0.5;
@@ -95,8 +95,8 @@ body {
 
 /* --- AGE PICKER (SHOW ALL AGES) --- */
 #agePicker {
-    width: 200px;
-    height: 45px;
+    width: 180px; /* Mindre bredd */
+    height: 40px; /* Förminskad */
     overflow-x: auto;
     display: flex;
     white-space: nowrap;
@@ -104,8 +104,8 @@ body {
 }
 
 #agePicker .option {
-    font-size: 1.1rem;
-    padding: 4px 6px;
+    font-size: 1rem;
+    padding: 3px 5px;
     text-align: center;
 }
 
@@ -113,13 +113,13 @@ body {
 .time-picker-container {
     display: flex;
     justify-content: center;
-    gap: 8px;
-    margin-top: 8px;
+    gap: 6px;
+    margin-top: 6px;
 }
 
 .time-picker {
-    width: 45px;
-    height: 80px;
+    width: 40px; /* Mindre */
+    height: 70px; /* Mindre */
     overflow-y: auto;
     scroll-snap-type: y mandatory;
     text-align: center;
@@ -129,18 +129,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 4px 0;
+    padding: 3px 0;
 }
 
 .time-picker .option {
-    padding: 4px;
-    font-size: 1.2rem;
+    padding: 3px;
+    font-size: 1rem; /* Mindre */
     color: #FBCA61;
     scroll-snap-align: center;
     cursor: pointer;
     opacity: 0.5;
-    height: 28px;
-    line-height: 28px;
+    height: 24px;
+    line-height: 24px;
 }
 
 .time-picker .option.active {
@@ -154,17 +154,17 @@ body {
 
 /* --- BUTTON --- */
 .calculate-button {
-    padding: 8px 12px;
-    font-size: 1rem;
+    padding: 6px 10px;
+    font-size: 0.9rem; /* Mindre */
     background: #FBCA61;
     color: #000;
     border: none;
     cursor: pointer;
     border-radius: 10px;
     transition: 0.3s;
-    margin-top: 12px;
-    width: 85%;
-    max-width: 260px;
+    margin-top: 10px;
+    width: 80%;
+    max-width: 220px;
 }
 
 .calculate-button:hover {
@@ -175,15 +175,34 @@ body {
     transform: scale(0.98);
 }
 
-/* --- MEDIA QUERY FÖR MOBIL (Ännu mindre höjd på mobil) --- */
+/* --- MEDIA QUERY FÖR MOBIL (Ännu mindre innehåll) --- */
 @media (max-width: 768px) {
     .calculator-container {
-        max-width: 55%; /* Ännu smalare */
-        height: 55vh; /* Kortare för att rymma allt */
-        padding: 12px;
+        max-width: 50%; /* Smalare */
+        height: 50vh; /* Kortare */
+        padding: 10px;
     }
 
     .matrix-background {
-        padding: 45px; /* Ökar luft på mobil */
+        padding: 50px; /* Ökar luft */
+    }
+
+    .picker {
+        width: 140px; /* Mindre */
+        height: 30px;
+    }
+
+    .option {
+        font-size: 0.9rem;
+    }
+
+    .time-picker {
+        width: 35px;
+        height: 60px;
+    }
+
+    .calculate-button {
+        font-size: 0.8rem;
+        padding: 5px 8px;
     }
 }

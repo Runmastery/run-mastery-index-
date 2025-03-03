@@ -16,7 +16,7 @@
 
     <!-- Calculator Container -->
     <div class="calculator-container">
-        <h1>RUN MASTERY INDEX</h1> <!-- Rubriken behålls, men inget annat onödigt -->
+        <h1>RUN MASTERY INDEX</h1> <!-- Behåller rubriken, men ingen extra text -->
 
         <!-- Gender Selection -->
         <div class="picker-container">
@@ -27,13 +27,13 @@
             </div>
         </div>
 
-        <!-- Age Selection (Förinställt på 35 år) -->
+        <!-- Age Selection (Förvalt 50 år) -->
         <div class="picker-container">
             <label for="agePicker">Select Age</label>
             <div class="picker" id="agePicker"></div>
         </div>
 
-        <!-- Distance Selection (Förinställt på Half Marathon) -->
+        <!-- Distance Selection (Förvalt Half Marathon) -->
         <div class="picker-container">
             <label for="distancePicker">Select Distance</label>
             <div class="picker" id="distancePicker">
@@ -48,8 +48,17 @@
         <h3>Enter Your Time</h3>
         <div class="time-picker-container">
             <div class="time-picker" id="hoursPicker"></div>
+            <span class="time-separator">:</span>
             <div class="time-picker" id="minutesPicker"></div>
+            <span class="time-separator">:</span>
             <div class="time-picker" id="secondsPicker"></div>
+        </div>
+
+        <!-- Time Labels -->
+        <div class="time-labels">
+            <span>hr</span>
+            <span>min</span>
+            <span>sec</span>
         </div>
 
         <!-- Calculate Button -->

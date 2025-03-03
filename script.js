@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const calculateButton = document.getElementById("calculateBtn");
     const resultDiv = document.getElementById("result");
 
-    let selectedDistance = "10000m"; // Förinställt på 10K
+    let selectedDistance = "Half Marathon"; // Förinställt på Half Marathon
     let selectedGender = "Men";
     let selectedAge = 50; // Förinställt på 50 år
 
@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", function() {
             ageOption.dataset.value = i;
             ageOption.textContent = i;
 
-            // Markera 35 som aktiv från start
-            if (i === 35) {
+            // Markera 50 som aktiv från start
+            if (i === 50) {
                 ageOption.classList.add("active");
             }
 
@@ -39,6 +39,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     document.querySelectorAll("#distancePicker .option").forEach(option => {
+        // Markera "Half Marathon" som aktiv från start
+        if (option.dataset.value === "Half Marathon") {
+            option.classList.add("active");
+        }
+
         option.addEventListener("click", function() {
             document.querySelectorAll("#distancePicker .option").forEach(opt => opt.classList.remove("active"));
             this.classList.add("active");

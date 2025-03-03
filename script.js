@@ -83,4 +83,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
         return 50 + 50 * ((worldRecord - userTime) / (worldRecord - averageTime));
     }
+document.addEventListener("DOMContentLoaded", function() {
+    const agePicker = document.getElementById("agePicker");
+
+    if (agePicker) {
+        for (let i = 15; i <= 85; i++) {
+            const ageOption = document.createElement("div");
+            ageOption.classList.add("option");
+            ageOption.dataset.value = i;
+            ageOption.textContent = i;
+            ageOption.addEventListener("click", function() {
+                document.querySelectorAll("#agePicker .option").forEach(opt => opt.classList.remove("active"));
+                this.classList.add("active");
+            });
+            agePicker.appendChild(ageOption);
+        }
+    }
+});
 });

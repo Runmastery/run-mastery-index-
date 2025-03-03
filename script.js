@@ -51,8 +51,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Dynamiskt generera tid för timmar, minuter, sekunder
-    function createTimePicker(id, min, max) {
+    // Dynamiskt generera tid för timmar, minuter, sekunder (Förinställt 1:45:30)
+    function createTimePicker(id, min, max, defaultValue) {
         const pickerElement = document.getElementById(id);
         if (pickerElement) {
             for (let i = min; i <= max; i++) {
@@ -60,18 +60,25 @@ document.addEventListener("DOMContentLoaded", function() {
                 option.classList.add("option");
                 option.dataset.value = i;
                 option.textContent = i;
+
+                // Markera förvalt värde
+                if (i === defaultValue) {
+                    option.classList.add("active");
+                }
+
                 option.addEventListener("click", function() {
                     document.querySelectorAll(`#${id} .option`).forEach(opt => opt.classList.remove("active"));
                     this.classList.add("active");
                 });
+
                 pickerElement.appendChild(option);
             }
         }
     }
 
-    createTimePicker("hoursPicker", 0, 23);
-    createTimePicker("minutesPicker", 0, 59);
-    createTimePicker("secondsPicker", 0, 59);
+    createTimePicker("hoursPicker", 0, 23, 1); // Förvalt 1h
+    createTimePicker("minutesPicker", 0, 59, 45); // Förvalt 45m
+    createTimePicker("secondsPicker", 0, 59, 30); // Förvalt 30s
 
     calculateButton.addEventListener("click", function() {
         const hours = parseInt(document.querySelector("#hoursPicker .option.active")?.dataset.value) || 0;

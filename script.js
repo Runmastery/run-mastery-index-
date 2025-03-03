@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let selectedDistance = "10000m"; // Förinställt på 10K
     let selectedGender = "Men";
-    let selectedAge = 35; // Förinställt på 35 år
+    let selectedAge = 50; // Förinställt på 50 år
 
-    // Generera åldrar 15-85 i agePicker och förinställ 35
+    // Generera åldrar 15-85 i agePicker och förinställ 50
     const agePicker = document.getElementById("agePicker");
     if (agePicker) {
         for (let i = 15; i <= 85; i++) {

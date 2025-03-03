@@ -21,25 +21,25 @@ body {
     background: #000000;
     overflow: hidden;
     z-index: -1;
-    padding: 40px; /* Ökad padding för mer Matrix-effekt */
+    padding: 35px;
 }
 
-/* --- CALCULATOR CONTAINER (Optimalt anpassad för innehållet) --- */
+/* --- CALCULATOR CONTAINER --- */
 .calculator-container {
     background-color: rgba(26, 26, 26, 0.9);
-    padding: 15px;
+    padding: 18px;
     border-radius: 15px;
     box-shadow: 0 0 15px #FBCA61;
-    max-width: 65%; /* Perfekt bredd */
-    height: 60vh; /* Perfekt höjd för att rymma allt */
+    max-width: 70%;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-/* --- HEADER INSIDE CONTAINER --- */
+/* --- HEADER --- */
 .calculator-container h1 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 5px;
@@ -50,7 +50,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+}
+
+.picker-container label {
+    font-size: 1.1rem; /* Samma storlek som övriga rubriker */
+    font-weight: normal; /* Tar bort fetstil */
 }
 
 /* --- PICKERS (GENDER, DISTANCE, AGE) --- */
@@ -59,11 +64,11 @@ body {
     justify-content: center;
     align-items: center;
     background: #1a1a1a;
-    padding: 6px;
+    padding: 8px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(251, 202, 97, 0.7);
-    width: 160px; /* Anpassad storlek */
-    height: 38px; /* Anpassad höjd */
+    box-shadow: 0 0 12px rgba(251, 202, 97, 0.7);
+    width: 180px;
+    height: 40px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     white-space: nowrap;
@@ -74,9 +79,9 @@ body {
 }
 
 .option {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #FBCA61;
-    padding: 4px 6px;
+    padding: 4px 8px;
     cursor: pointer;
     scroll-snap-align: center;
     opacity: 0.5;
@@ -93,10 +98,10 @@ body {
     opacity: 1;
 }
 
-/* --- AGE PICKER (Optimerad så att allt får plats) --- */
+/* --- AGE PICKER --- */
 #agePicker {
-    width: 180px;
-    height: 40px;
+    width: 200px;
+    height: 45px;
     overflow-x: auto;
     display: flex;
     white-space: nowrap;
@@ -104,104 +109,92 @@ body {
 }
 
 #agePicker .option {
-    font-size: 1rem;
-    padding: 4px 5px;
+    font-size: 1.1rem;
+    padding: 4px 6px;
     text-align: center;
 }
 
-/* --- TIME PICKER (Kolon & etiketter) --- */
+/* --- TIME PICKER (Fixat kolon och avstånd) --- */
 .time-picker-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4px;
-    margin-top: 8px;
-    position: relative;
+    gap: 5px;
+    margin-top: 10px; /* Justerat avstånd */
 }
 
+/* Kolontecken mellan fälten */
+.time-separator {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #FBCA61;
+    margin: 0 5px;
+}
+
+/* Tidväljare */
 .time-picker {
-    width: 40px;
-    height: 60px;
+    width: 45px;
+    height: 80px;
     overflow-y: auto;
     scroll-snap-type: y mandatory;
     text-align: center;
     background: #1a1a1a;
-    border-radius: 8px;
-    box-shadow: 0 0 6px rgba(251, 202, 97, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(251, 202, 97, 0.7);
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 4px 0;
-    position: relative;
 }
 
-/* --- Kolon mellan tidspicker-fälten --- */
-.time-picker-container::before,
-.time-picker-container::after {
-    content: ":";
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #FBCA61;
-    position: relative;
-    top: -2px;
-}
-
-.time-picker-container::before {
-    margin-right: 3px;
-}
-
-.time-picker-container::after {
-    margin-left: 3px;
-}
-
-/* --- TIME PICKER OPTIONS --- */
 .time-picker .option {
-    padding: 2px;
-    font-size: 1rem;
+    padding: 4px;
+    font-size: 1.2rem;
     color: #FBCA61;
     scroll-snap-align: center;
     cursor: pointer;
     opacity: 0.5;
-    height: 24px;
-    line-height: 24px;
+    height: 28px;
+    line-height: 28px;
 }
 
 .time-picker .option.active {
     background: #FBCA61;
     color: #000;
     font-weight: bold;
-    border-radius: 8px;
+    border-radius: 10px;
     opacity: 1;
     transform: scale(1.1);
 }
 
-/* --- ETIKETTER UNDER TIDSPICKERS (HR, MIN, SEC) --- */
+/* Tidväljare etiketter (HR, MIN, SEC) */
 .time-labels {
     display: flex;
     justify-content: center;
-    gap: 35px; /* Samma mellanrum som tidspickers */
-    margin-top: 2px;
-    font-size: 0.7rem;
-    color: #FBCA61;
-    text-transform: uppercase;
-    font-weight: bold;
+    gap: 20px;
+    margin-top: -5px; /* Justerat avstånd */
 }
 
-/* --- BUTTON (Nu är den centrerad ordentligt) --- */
-.calculate-button {
-    padding: 6px 10px;
+.time-labels span {
     font-size: 0.9rem;
+    font-weight: normal;
+    color: #FBCA61;
+}
+
+/* --- BUTTON (Centrerad korrekt) --- */
+.calculate-button {
+    padding: 8px 12px;
+    font-size: 1rem;
     background: #FBCA61;
     color: #000;
     border: none;
     cursor: pointer;
     border-radius: 10px;
     transition: 0.3s;
-    margin: 15px auto 0 auto; /* Centrerad korrekt */
-    width: 80%;
-    max-width: 220px;
-    display: block;
-    text-align: center;
+    margin-top: 12px;
+    width: 85%;
+    max-width: 260px;
+    align-self: center; /* Säkerställer att den är centrerad */
 }
 
 .calculate-button:hover {
@@ -212,21 +205,21 @@ body {
     transform: scale(0.98);
 }
 
-/* --- MEDIA QUERY FÖR MOBIL (Optimerad) --- */
+/* --- MEDIA QUERY FÖR MOBIL --- */
 @media (max-width: 768px) {
     .calculator-container {
-        max-width: 60%; /* Smalare på mobil */
-        height: 65vh; /* Kortare för att allt ska få plats */
-        padding: 12px;
+        max-width: 60%;
+        height: 65vh;
+        padding: 15px;
     }
 
     .matrix-background {
-        padding: 35px; /* Mer luft på mobil */
+        padding: 40px;
     }
 
     .picker {
-        width: 140px; /* Mindre */
-        height: 34px;
+        width: 150px;
+        height: 35px;
     }
 
     .option {
@@ -235,16 +228,20 @@ body {
 
     .time-picker {
         width: 35px;
-        height: 55px;
+        height: 60px;
+    }
+
+    .time-separator {
+        font-size: 1.2rem;
+        margin: 0 3px;
     }
 
     .time-labels {
-        font-size: 0.6rem;
-        gap: 30px;
+        gap: 15px;
     }
 
     .calculate-button {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         padding: 5px 8px;
     }
 }

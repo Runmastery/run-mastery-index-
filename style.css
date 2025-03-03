@@ -54,11 +54,11 @@ body {
 }
 
 .picker-container label {
-    font-size: 1.1rem; /* Samma storlek som övriga rubriker */
-    font-weight: normal; /* Tar bort fetstil */
+    font-size: 1.1rem;
+    font-weight: normal;
 }
 
-/* --- PICKERS (GENDER, DISTANCE, AGE) --- */
+/* --- PICKERS (GENDER, DISTANCE, AGE) - Exakt lika stora nu! --- */
 .picker {
     display: flex;
     justify-content: center;
@@ -67,8 +67,8 @@ body {
     padding: 8px;
     border-radius: 10px;
     box-shadow: 0 0 12px rgba(251, 202, 97, 0.7);
-    width: 180px;
-    height: 40px;
+    width: 200px; /* Alla valboxar är exakt lika breda */
+    height: 45px; /* Alla valboxar är exakt lika höga */
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     white-space: nowrap;
@@ -114,13 +114,13 @@ body {
     text-align: center;
 }
 
-/* --- TIME PICKER (Fixat kolon och avstånd) --- */
+/* --- TIME PICKER --- */
 .time-picker-container {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
-    margin-top: 10px; /* Justerat avstånd */
+    margin-top: -5px; /* Flyttar upp tidväljarna lite */
 }
 
 /* Kolontecken mellan fälten */
@@ -167,18 +167,14 @@ body {
     transform: scale(1.1);
 }
 
-/* Tidväljare etiketter (HR, MIN, SEC) */
+/* Tidväljare etiketter (hr, min, sec) */
 .time-labels {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-top: -5px; /* Justerat avstånd */
-}
-
-.time-labels span {
     font-size: 0.9rem;
-    font-weight: normal;
-    color: #FBCA61;
+    text-transform: lowercase; /* Små bokstäver */
+    margin-top: -10px; /* Perfekt centrerat nu */
 }
 
 /* --- BUTTON (Centrerad korrekt) --- */
@@ -194,7 +190,7 @@ body {
     margin-top: 12px;
     width: 85%;
     max-width: 260px;
-    align-self: center; /* Säkerställer att den är centrerad */
+    align-self: center;
 }
 
 .calculate-button:hover {
@@ -218,8 +214,8 @@ body {
     }
 
     .picker {
-        width: 150px;
-        height: 35px;
+        width: 180px;
+        height: 40px;
     }
 
     .option {

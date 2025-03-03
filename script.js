@@ -2,11 +2,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const calculateButton = document.getElementById("calculateBtn");
     const resultDiv = document.getElementById("result");
 
-    let selectedDistance = "10000m"; 
+    let selectedDistance = "10000m"; // Förinställt på 10K
     let selectedGender = "Men";
-    let selectedAge = 25;
+    let selectedAge = 35; // Förinställt på 35 år
 
-    // Generera åldrar 15-85 i agePicker
+    // Generera åldrar 15-85 i agePicker och förinställ 35
     const agePicker = document.getElementById("agePicker");
     if (agePicker) {
         for (let i = 15; i <= 85; i++) {
@@ -14,11 +14,18 @@ document.addEventListener("DOMContentLoaded", function() {
             ageOption.classList.add("option");
             ageOption.dataset.value = i;
             ageOption.textContent = i;
+
+            // Markera 35 som aktiv från start
+            if (i === 35) {
+                ageOption.classList.add("active");
+            }
+
             ageOption.addEventListener("click", function() {
                 document.querySelectorAll("#agePicker .option").forEach(opt => opt.classList.remove("active"));
                 this.classList.add("active");
                 selectedAge = parseInt(this.dataset.value);
             });
+
             agePicker.appendChild(ageOption);
         }
     }

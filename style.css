@@ -21,17 +21,17 @@ body {
     background: #000000;
     overflow: hidden;
     z-index: -1;
-    padding: 25px; /* Mer space runt för Matrix-effekten */
+    padding: 35px; /* Ökad padding för mer Matrix-effekt */
 }
 
-/* --- CALCULATOR CONTAINER --- */
+/* --- CALCULATOR CONTAINER (Mindre på mobilen) --- */
 .calculator-container {
     background-color: rgba(26, 26, 26, 0.9);
-    padding: 20px;
+    padding: 18px;
     border-radius: 15px;
     box-shadow: 0 0 15px #FBCA61;
-    max-width: 75%; /* Mindre för att ge mer Matrix-utrymme */
-    height: 90vh; /* Säkerställer att allt får plats utan scroll */
+    max-width: 70%; /* Gjort smalare för mer Matrix-effekt */
+    height: 85vh; /* Mindre höjd för att ge mer luft */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -173,4 +173,17 @@ body {
 
 .calculate-button:active {
     transform: scale(0.98);
+}
+
+/* --- MEDIA QUERY FÖR MOBIL (Extra luft) --- */
+@media (max-width: 768px) {
+    .calculator-container {
+        max-width: 60%; /* Ännu smalare på mobil */
+        height: 80vh; /* Kortare för mer Matrix-effekt */
+        padding: 15px;
+    }
+
+    .matrix-background {
+        padding: 40px; /* Ökar luft på mobil */
+    }
 }

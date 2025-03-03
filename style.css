@@ -24,17 +24,17 @@ body {
     padding: 35px; /* Ökad padding för mer Matrix-effekt */
 }
 
-/* --- CALCULATOR CONTAINER (Mindre på mobilen) --- */
+/* --- CALCULATOR CONTAINER (Mindre höjd) --- */
 .calculator-container {
     background-color: rgba(26, 26, 26, 0.9);
     padding: 18px;
     border-radius: 15px;
     box-shadow: 0 0 15px #FBCA61;
-    max-width: 70%; /* Gjort smalare för mer Matrix-effekt */
-    height: 85vh; /* Mindre höjd för att ge mer luft */
+    max-width: 70%; /* Behåller bredden */
+    height: 70vh; /* Mindre höjd för att ge mer luft och rymma allt */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between; /* Ser till att allt får plats */
 }
 
 /* --- HEADER INSIDE CONTAINER --- */
@@ -175,11 +175,11 @@ body {
     transform: scale(0.98);
 }
 
-/* --- MEDIA QUERY FÖR MOBIL (Extra luft) --- */
+/* --- MEDIA QUERY FÖR MOBIL (Ännu mindre höjd på mobil) --- */
 @media (max-width: 768px) {
     .calculator-container {
-        max-width: 60%; /* Ännu smalare på mobil */
-        height: 80vh; /* Kortare för mer Matrix-effekt */
+        max-width: 60%; /* Behåller smalare bredd */
+        height: 65vh; /* Kortare höjd så att allt ryms */
         padding: 15px;
     }
 
